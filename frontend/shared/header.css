@@ -1,0 +1,321 @@
+/* ============================================
+   NextCampus — Header Styles
+   ============================================ */
+.nc-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: var(--header-height);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.nc-header.scrolled {
+    box-shadow: var(--shadow-md);
+}
+
+.nc-header .container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 20px;
+}
+
+/* Logo */
+.nc-logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    flex-shrink: 0;
+    margin-right: 12px;
+}
+
+.nc-wordmark {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-weight: 800;
+    font-size: 1.55rem;
+    letter-spacing: -0.04em;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.nc-wordmark span {
+    color: var(--primary);
+}
+
+/* Nav */
+.nc-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nc-nav a {
+    padding: 8px 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+    white-space: nowrap;
+}
+
+.nc-nav a:hover,
+.nc-nav a.active {
+    color: var(--primary);
+    background: var(--primary-bg);
+}
+
+/* Search Bar — icon on right */
+.nc-search {
+    flex: 1;
+    max-width: 320px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.nc-search-input {
+    width: 100%;
+    padding: 9px 42px 9px 16px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    color: var(--text);
+    background: var(--gray-50);
+    transition: var(--transition-fast);
+    font-family: inherit;
+}
+
+.nc-search-input::placeholder {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.nc-search-input:focus {
+    border-color: var(--primary);
+    background: var(--white);
+    box-shadow: 0 0 0 3px var(--primary-100);
+    outline: none;
+}
+
+.nc-search-icon {
+    position: absolute;
+    right: 12px;
+    color: var(--text-muted);
+    pointer-events: none;
+    width: 18px;
+    height: 18px;
+}
+
+/* Close button — hidden on desktop */
+.nc-search-close {
+    display: none;
+}
+
+/* Header Actions — Log In / Join for Free */
+.nc-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.nc-login-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    white-space: nowrap;
+    transition: var(--transition-fast);
+}
+
+.nc-login-link:hover {
+    color: var(--primary-dark);
+}
+
+.nc-join-btn {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    border: 1.5px solid var(--primary);
+    border-radius: var(--radius-full);
+    background: transparent;
+    white-space: nowrap;
+    transition: var(--transition-fast);
+}
+
+.nc-join-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* Mobile Hamburger — hidden on desktop */
+.nc-mobile-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    flex-shrink: 0;
+}
+
+.nc-mobile-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.nc-mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nc-mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nc-mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ==========================================
+   Mobile Responsive (≤ 900px)
+   Coursera-style: ☰  NextCampus  🔍
+   ========================================== */
+@media (max-width: 900px) {
+    .nc-header .container {
+        gap: 0;
+        justify-content: space-between;
+    }
+
+    /* Show hamburger on left */
+    .nc-mobile-toggle {
+        display: flex;
+        order: 1;
+    }
+
+    /* Center logo */
+    .nc-logo {
+        order: 2;
+        flex: 1;
+        justify-content: center;
+    }
+
+    /* Search icon on right */
+    .nc-search {
+        order: 3;
+        flex: none;
+        max-width: none;
+        margin-left: 0;
+    }
+
+    /* Hide nav, login/join buttons */
+    .nc-nav {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        flex-direction: column;
+        padding: 16px;
+        gap: 4px;
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-120%);
+        transition: var(--transition);
+        z-index: 999;
+    }
+
+    .nc-nav.open {
+        transform: translateY(0);
+    }
+
+    .nc-nav a {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 1rem;
+    }
+
+    .nc-header-actions {
+        display: none;
+    }
+
+    /* Search: collapsed to just the icon */
+    .nc-search-input {
+        display: none;
+    }
+
+    .nc-search-icon {
+        position: static;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        pointer-events: auto;
+        color: var(--text);
+    }
+
+    /* Expanded: full-width overlay search bar */
+    .nc-search.expanded {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--header-height);
+        background: var(--white);
+        z-index: 1100;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        gap: 12px;
+        box-shadow: var(--shadow-md);
+    }
+
+    .nc-search.expanded .nc-search-icon {
+        display: none;
+    }
+
+    .nc-search.expanded .nc-search-input {
+        display: block;
+        flex: 1;
+        border: none;
+        background: var(--gray-50);
+        font-size: 1rem;
+        padding: 12px 16px;
+        border-radius: var(--radius-lg);
+    }
+
+    .nc-search.expanded .nc-search-input:focus {
+        box-shadow: none;
+    }
+
+    .nc-search.expanded .nc-search-close {
+        display: flex;
+        width: 36px;
+        height: 36px;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-full);
+        background: var(--gray-100);
+        border: none;
+        font-size: 1.3rem;
+        cursor: pointer;
+        color: var(--text-secondary);
+        flex-shrink: 0;
+    }
+}

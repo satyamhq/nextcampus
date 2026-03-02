@@ -1,0 +1,114 @@
+/* ============================================
+   NextCampus — Footer Styles
+   ============================================ */
+.nc-footer {
+    background: var(--gray-900);
+    color: var(--gray-300);
+    padding: 64px 0 0;
+}
+
+.nc-footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nc-footer-brand h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 12px;
+}
+
+.nc-footer-brand h3 span {
+    color: var(--white);
+}
+
+.nc-footer-brand p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--gray-400);
+    margin-bottom: 20px;
+}
+
+.nc-footer-social {
+    display: flex;
+    gap: 12px;
+}
+
+.nc-footer-social a {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-300);
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.nc-footer-social a:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.nc-footer-col h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.nc-footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.nc-footer-col ul li a {
+    color: var(--gray-400);
+    font-size: 0.88rem;
+    transition: var(--transition-fast);
+}
+
+.nc-footer-col ul li a:hover {
+    color: var(--white);
+    padding-left: 4px;
+}
+
+.nc-footer-bottom {
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+}
+
+@media (max-width: 900px) {
+    .nc-footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    .nc-footer-brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .nc-footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nc-footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+}

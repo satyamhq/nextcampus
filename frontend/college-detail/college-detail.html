@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Details — NextCampus</title>
+    <meta name="description"
+        content="View detailed information about this college including fees, placements, reviews, infrastructure, and admission process.">
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="../shared/header.css">
+    <link rel="stylesheet" href="../shared/footer.css">
+    <link rel="stylesheet" href="college-detail.css">
+</head>
+
+<body>
+    <section class="detail-hero" id="detail-hero">
+        <div class="container">
+            <div class="detail-hero-content" id="hero-content">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <section class="section-sm">
+        <div class="container">
+            <div class="detail-tabs" id="detail-tabs">
+                <button class="tab-btn active" data-tab="overview">Overview</button>
+                <button class="tab-btn" data-tab="fees">Fees & Programs</button>
+                <button class="tab-btn" data-tab="placements">Placements</button>
+                <button class="tab-btn" data-tab="infrastructure">Infrastructure</button>
+                <button class="tab-btn" data-tab="reviews">Reviews</button>
+                <button class="tab-btn" data-tab="admission">Admission</button>
+            </div>
+
+            <div class="detail-layout">
+                <div class="detail-main">
+                    <div class="tab-content active" id="tab-overview"></div>
+                    <div class="tab-content" id="tab-fees"></div>
+                    <div class="tab-content" id="tab-placements"></div>
+                    <div class="tab-content" id="tab-infrastructure"></div>
+                    <div class="tab-content" id="tab-reviews"></div>
+                    <div class="tab-content" id="tab-admission"></div>
+                </div>
+                <aside class="detail-sidebar" id="detail-sidebar"></aside>
+            </div>
+        </div>
+    </section>
+
+    <script src="../shared/header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="college-detail.js"></script>
+</body>
+
+</html>

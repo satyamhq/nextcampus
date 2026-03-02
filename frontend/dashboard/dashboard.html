@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — NextCampus</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="../shared/header.css">
+    <link rel="stylesheet" href="../shared/footer.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+    <section class="page-hero">
+        <div class="container">
+            <h1>My <span class="text-gradient">Dashboard</span></h1>
+            <p id="welcome-msg">Loading...</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="dash-tabs">
+                <button class="dash-tab active" data-tab="saved">&#9829; Saved Colleges</button>
+                <button class="dash-tab" data-tab="comparisons">&#9878; Comparisons</button>
+                <button class="dash-tab" data-tab="loans">&#128176; Loan Applications</button>
+                <button class="dash-tab" data-tab="profile">&#128100; Profile</button>
+            </div>
+            <div class="dash-content active" id="tab-saved">
+                <div class="dash-grid" id="saved-list"></div>
+            </div>
+            <div class="dash-content" id="tab-comparisons">
+                <div id="comparisons-list"></div>
+            </div>
+            <div class="dash-content" id="tab-loans">
+                <div id="loans-list"></div>
+            </div>
+            <div class="dash-content" id="tab-profile">
+                <div class="profile-card">
+                    <form id="profile-form">
+                        <div class="form-group"><label class="form-label">Name</label><input type="text" id="p-name"
+                                class="form-input"></div>
+                        <div class="form-group"><label class="form-label">Phone</label><input type="text" id="p-phone"
+                                class="form-input"></div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                    <button class="btn btn-secondary mt-3" id="logout-btn" style="width:100%">Logout</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="../shared/header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

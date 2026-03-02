@@ -1,0 +1,205 @@
+/* Dashboard Page Styles */
+.page-hero {
+    padding: 80px 0 48px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe, #e0e7ff);
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.page-hero p {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dash-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.dash-tab {
+    padding: 10px 24px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--radius-full);
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dash-tab:hover,
+.dash-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.dash-content {
+    display: none;
+}
+
+.dash-content.active {
+    display: block;
+}
+
+.dash-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.saved-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: var(--transition);
+}
+
+.saved-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.saved-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.saved-card p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.saved-card .meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 0.78rem;
+}
+
+.saved-card .meta strong {
+    display: block;
+}
+
+.saved-card .actions {
+    display: flex;
+    gap: 8px;
+}
+
+.saved-card .actions .btn {
+    flex: 1;
+    font-size: 0.78rem;
+    padding: 8px;
+}
+
+.comp-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comp-card h4 {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.comp-card .colleges-list {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.loan-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 16px;
+    align-items: center;
+}
+
+.loan-card .lbl {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.loan-card strong {
+    font-size: 1rem;
+}
+
+.loan-status {
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.loan-status.pending {
+    background: var(--warning-bg);
+    color: var(--warning);
+}
+
+.loan-status.approved {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.loan-status.rejected {
+    background: var(--danger-bg);
+    color: var(--danger);
+}
+
+.profile-card {
+    max-width: 500px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+}
+
+.empty-state h3 {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .dash-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .loan-card {
+        grid-template-columns: 1fr 1fr;
+    }
+}

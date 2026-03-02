@@ -1,0 +1,118 @@
+/* Compare Page Styles */
+.page-hero {
+    padding: 80px 0 48px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe, #e0e7ff);
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.page-hero p {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.compare-selectors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.compare-slot {
+    position: relative;
+}
+
+.compare-slot .form-select {
+    padding-right: 40px;
+}
+
+.remove-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.compare-table-container {
+    margin-top: 48px;
+    overflow-x: auto;
+}
+
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.compare-table th,
+.compare-table td {
+    padding: 16px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.compare-table th {
+    background: var(--bg-secondary);
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.compare-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    min-width: 160px;
+}
+
+.compare-table .college-name {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.compare-table .best-value {
+    background: var(--success-bg);
+    color: var(--success);
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .compare-selectors {
+        grid-template-columns: 1fr;
+    }
+
+    .page-hero h1 {
+        font-size: 2rem;
+    }
+}

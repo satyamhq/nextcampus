@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget &amp; Loans — NextCampus | EMI Calculator &amp; Loan Eligibility</title>
+    <meta name="description"
+        content="Calculate your education loan EMI, check loan eligibility, and assess risk with NextCampus Budget Planner.">
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="../shared/header.css">
+    <link rel="stylesheet" href="../shared/footer.css">
+    <link rel="stylesheet" href="budget-loan.css">
+</head>
+
+<body>
+    <section class="page-hero">
+        <div class="container">
+            <h1>Budget &amp; <span class="text-gradient">Loan Planner</span></h1>
+            <p>Plan your education finances smartly with our calculators</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="budget-grid">
+                <!-- EMI Calculator -->
+                <div class="budget-card" id="emi-calc">
+                    <h2>&#128176; EMI Calculator</h2>
+                    <p class="text-muted mb-3">Calculate your monthly education loan EMI</p>
+                    <div class="form-group">
+                        <label class="form-label">Loan Amount (&#8377;)</label>
+                        <input type="range" id="emi-amount" min="100000" max="5000000" step="50000" value="1000000"
+                            class="range-slider">
+                        <div class="range-value" id="emi-amount-val">&#8377;10,00,000</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tenure (Years)</label>
+                        <input type="range" id="emi-tenure" min="1" max="15" step="1" value="7" class="range-slider">
+                        <div class="range-value" id="emi-tenure-val">7 years</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Interest Rate (%)</label>
+                        <input type="range" id="emi-rate" min="5" max="15" step="0.5" value="8.5" class="range-slider">
+                        <div class="range-value" id="emi-rate-val">8.5%</div>
+                    </div>
+                    <div class="emi-result" id="emi-result">
+                        <div class="emi-main"><span>Monthly EMI</span><strong id="emi-monthly">&#8377;0</strong></div>
+                        <div class="emi-details">
+                            <div><span>Total Payable</span><strong id="emi-total">&#8377;0</strong></div>
+                            <div><span>Total Interest</span><strong id="emi-interest">&#8377;0</strong></div>
+                        </div>
+                    </div>
+                    <!-- Risk Meter -->
+                    <div class="risk-meter" id="risk-meter">
+                        <h4>EMI Risk Assessment</h4>
+                        <div class="risk-bar">
+                            <div class="risk-fill" id="risk-fill"></div>
+                        </div>
+                        <div class="risk-labels"><span>Safe</span><span>Moderate</span><span>High</span></div>
+                        <p class="risk-text" id="risk-text">Calculating...</p>
+                    </div>
+                </div>
+
+                <!-- Loan Eligibility -->
+                <div class="budget-card" id="eligibility-card">
+                    <h2>&#128203; Loan Eligibility</h2>
+                    <p class="text-muted mb-3">Check how much education loan you qualify for</p>
+                    <div class="form-group">
+                        <label class="form-label">Annual Family Income (&#8377;)</label>
+                        <input type="number" id="el-income" class="form-input" placeholder="e.g. 800000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Required Loan Amount (&#8377;)</label>
+                        <input type="number" id="el-amount" class="form-input" placeholder="e.g. 1000000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Existing EMIs (&#8377;/month)</label>
+                        <input type="number" id="el-existing" class="form-input" placeholder="0" value="0">
+                    </div>
+                    <button class="btn btn-primary" id="check-eligibility" style="width:100%">Check Eligibility</button>
+                    <div class="eligibility-result" id="eligibility-result" style="display:none"></div>
+                </div>
+            </div>
+
+            <!-- Scholarships -->
+            <div class="scholarships-section fade-in">
+                <h2 class="section-title">&#127891; Scholarships &amp; Grants</h2>
+                <p class="section-subtitle">Explore financial aid options to reduce your education cost</p>
+
+                <h3 class="scholarship-heading">&#127963; Government Scholarships</h3>
+                <div class="scholarship-table-wrap">
+                    <table class="scholarship-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Provider</th>
+                                <th>Eligibility</th>
+                                <th>Benefits</th>
+                                <th>Deadline</th>
+                                <th>Apply</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Central Sector Scheme for College &amp; University Students</strong></td>
+                                <td>Ministry of Education, GoI</td>
+                                <td>Income &lt; &#8377;4.5L, 80%+ in Class 12, UG/PG</td>
+                                <td>&#8377;10k&#8211;&#8377;20k/year</td>
+                                <td>15 Dec 2025</td>
+                                <td><a href="https://scholarships.gov.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Top Class Education Scheme for SC Students</strong></td>
+                                <td>Ministry of Social Justice, GoI</td>
+                                <td>SC, Income &lt; &#8377;8L, UG/PG in top institutes</td>
+                                <td>Full tuition + maintenance</td>
+                                <td>15 Dec 2025</td>
+                                <td><a href="https://scholarships.gov.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>PM Yashasvi Scholarship</strong></td>
+                                <td>Ministry of Social Justice, GoI</td>
+                                <td>OBC/EBC/DNT, Income &lt; &#8377;2.5L, Class 9&#8211;12+UG</td>
+                                <td>&#8377;75k&#8211;&#8377;1.25L</td>
+                                <td>31 Aug 2026</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>e-Medhabruti UG Merit Scholarship</strong></td>
+                                <td>Govt of Odisha</td>
+                                <td>Income &lt; &#8377;8L, UG, Odisha domicile</td>
+                                <td>&#8377;10k</td>
+                                <td>Ongoing</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>e-Medhabruti PG Merit Scholarship</strong></td>
+                                <td>Govt of Odisha</td>
+                                <td>Income &lt; &#8377;8L, PG, Odisha domicile</td>
+                                <td>&#8377;15k</td>
+                                <td>Ongoing</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gopabandhu Sikhya Sahayata Yojana</strong></td>
+                                <td>Govt of Odisha</td>
+                                <td>Income &lt; &#8377;2.5L, UG/PG, Odisha</td>
+                                <td>&#8377;20k</td>
+                                <td>Check portal</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Shahid Madho Singh Haath Kharcha Yojana</strong></td>
+                                <td>Govt of Odisha</td>
+                                <td>Income &lt; &#8377;2.5L, ST, Class 9&#8211;12+UG, Odisha</td>
+                                <td>&#8377;5k</td>
+                                <td>31 Dec 2025</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dr. Ambedkar Medhavi Chhattar Sansodhit Yojana</strong></td>
+                                <td>Haryana Govt</td>
+                                <td>SC, Income &lt; &#8377;4L, All levels</td>
+                                <td>Varies</td>
+                                <td>30 Nov 2025</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Swami Vivekananda Merit-cum-Means Scholarship</strong></td>
+                                <td>West Bengal Govt</td>
+                                <td>Income &lt; &#8377;2.5L, HS/UG/PG, WB domicile</td>
+                                <td>Varies</td>
+                                <td>30 Nov 2025</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dorjee Khandu Merit Scholarship</strong></td>
+                                <td>Arunachal Pradesh Higher Ed Dept</td>
+                                <td>UG, AP domicile</td>
+                                <td>Varies</td>
+                                <td>31 Oct 2025</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nagaland State Merit Scholarship</strong></td>
+                                <td>Nagaland Higher Ed Dept</td>
+                                <td>ST, Class 11&#8211;PG</td>
+                                <td>Varies</td>
+                                <td>30 Sept 2025</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Indira Gandhi Utkrisht Chatravriti Yojana</strong></td>
+                                <td>Himachal Pradesh Govt</td>
+                                <td>All subjects, HP domicile</td>
+                                <td>Up to &#8377;18k/annum</td>
+                                <td>30 Jan 2026</td>
+                                <td><a href="https://wemakescholars.com" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="scholarship-heading" style="margin-top:48px">&#127942; Private Scholarships &amp; Grants</h3>
+                <div class="scholarship-table-wrap">
+                    <table class="scholarship-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Provider</th>
+                                <th>Eligibility</th>
+                                <th>Benefits</th>
+                                <th>Deadline</th>
+                                <th>Apply</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>SBI Asha Scholarship</strong></td>
+                                <td>SBI Foundation</td>
+                                <td>75%+ or 7 CGPA, Income &lt; &#8377;6L, College</td>
+                                <td>Varies (tuition support)</td>
+                                <td>Open (2025&#8211;26)</td>
+                                <td><a href="https://sbiashascholarship.co.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Baba Gurbachan Singh Scholarship</strong></td>
+                                <td>Sant Nirankari Charitable Foundation</td>
+                                <td>1st yr UG/Diploma, Income &#8804; &#8377;3.5L</td>
+                                <td>Up to 100% tuition</td>
+                                <td>30 Sept 2025</td>
+                                <td><a href="https://buddy4study.com" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>LIC Golden Jubilee Scholarship</strong></td>
+                                <td>LIC</td>
+                                <td>EWS, 60&#8211;75% in Class 12, UG/professional</td>
+                                <td>Up to &#8377;40k/annum</td>
+                                <td>Mid-2025</td>
+                                <td><a href="https://buddy4study.com" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tata Capital Pankh Scholarship</strong></td>
+                                <td>Tata Capital</td>
+                                <td>EWS, professional courses, Income &#8804; &#8377;4L</td>
+                                <td>Up to &#8377;50k/annum</td>
+                                <td>Mid-2025</td>
+                                <td><a href="https://buddy4study.com" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>J.N. Tata Endowment Scholarship</strong></td>
+                                <td>Tata Trusts</td>
+                                <td>UG/PG (incl abroad), merit-based</td>
+                                <td>Loan-scholarship (repayable)</td>
+                                <td>7 March 2025</td>
+                                <td><a href="https://buddy4study.com" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reliance Foundation Scholarships</strong></td>
+                                <td>Reliance Foundation</td>
+                                <td>UG/PG, merit-need based</td>
+                                <td>Up to &#8377;2L</td>
+                                <td>Check portal</td>
+                                <td><a href="https://collegesimplified.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Aditya Birla Scholarships</strong></td>
+                                <td>Aditya Birla Group</td>
+                                <td>Top rankers in premier institutes, UG</td>
+                                <td>High-value + leadership</td>
+                                <td>Varies</td>
+                                <td><a href="https://collegesimplified.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>BITSAT Scholarship</strong></td>
+                                <td>BITS Pilani</td>
+                                <td>BITSAT qualifiers, UG</td>
+                                <td>&#8377;20k&#8211;&#8377;2L</td>
+                                <td>Check BITS site</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Azim Premji Scholarship</strong></td>
+                                <td>Azim Premji Foundation</td>
+                                <td>UG/PG need-based</td>
+                                <td>&#8377;30k</td>
+                                <td>Varies</td>
+                                <td><a href="https://indiascholarships.in" target="_blank"
+                                        class="btn btn-primary btn-sm">Apply</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="../shared/header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="budget-loan.js"></script>
+</body>
+
+</html>

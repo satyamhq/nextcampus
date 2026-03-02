@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Colleges — NextCampus | Find & Compare Best Colleges in India</title>
+    <meta name="description"
+        content="Browse and filter 10,000+ colleges by program, budget, rank, and location. Compare fees, placements, and rankings.">
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="../shared/header.css">
+    <link rel="stylesheet" href="../shared/footer.css">
+    <link rel="stylesheet" href="colleges.css">
+</head>
+
+<body>
+    <section class="page-hero">
+        <div class="container">
+            <h1>Top <span class="text-gradient">Colleges</span> in India</h1>
+            <p>Filter and discover the best colleges that match your needs</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="colleges-layout">
+                <!-- Filter Sidebar -->
+                <aside class="filter-sidebar" id="filter-sidebar">
+                    <div class="filter-header">
+                        <h3>&#128269; Filters</h3>
+                        <button class="btn btn-sm" id="clear-filters">Clear All</button>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Program</label>
+                        <select id="f-program" class="form-select">
+                            <option value="">All Programs</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Medical">Medical</option>
+                            <option value="MBA">MBA</option>
+                            <option value="Law">Law</option>
+                            <option value="Design">Design</option>
+                            <option value="Arts & Science">Arts & Science</option>
+                            <option value="Commerce">Commerce</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Budget Range</label>
+                        <input type="range" id="f-budget-slider" class="range-slider" min="0" max="5000000"
+                            step="100000" value="5000000">
+                        <div class="range-value" id="f-budget-val">Up to &#8377;50 Lakh</div>
+                        <input type="hidden" id="f-budget-min" value="">
+                        <input type="hidden" id="f-budget-max" value="5000000">
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Location (State)</label>
+                        <select id="f-location" class="form-select">
+                            <option value="">All States</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jammu & Kashmir">Jammu &amp; Kashmir</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Puducherry">Puducherry</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Institution Type</label>
+                        <select id="f-type" class="form-select">
+                            <option value="">All Types</option>
+                            <option value="Government">Government</option>
+                            <option value="Private">Private</option>
+                            <option value="Deemed">Deemed</option>
+                            <option value="Autonomous">Autonomous</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Sort By</label>
+                        <select id="f-sort" class="form-select">
+                            <option value="score">NextCampus Score</option>
+                            <option value="rank">NIRF Ranking</option>
+                            <option value="fees_low">Fees: Low to High</option>
+                            <option value="fees_high">Fees: High to Low</option>
+                            <option value="placement">Placement Rate</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" id="apply-filters" style="width:100%">Apply Filters</button>
+                </aside>
+
+                <!-- College Results -->
+                <div class="college-results">
+                    <div class="results-header" id="results-header">
+                        <p><strong id="results-count">0</strong> colleges found</p>
+                        <button class="btn btn-sm btn-secondary" id="toggle-mobile-filters">&#9776; Filters</button>
+                    </div>
+                    <div class="college-list" id="college-list">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../shared/header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="colleges.js"></script>
+</body>
+
+</html>

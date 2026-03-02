@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextCampus — Find & Compare Best Colleges in India by Budget, Rank & ROI</title>
+  <meta name="description"
+    content="Compare 1,000+ colleges by fees, placements, ROI & your exam rank. NextCampus helps students and parents find affordable, high-placement engineering, MBA & professional colleges in India.">
+  <meta name="keywords"
+    content="best engineering colleges India, college comparison, college ROI, NextCampus, Next Campus, affordable colleges, college under budget, JEE Main colleges, placement data">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://nextcampus.in/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NextCampus">
+  <meta property="og:title" content="NextCampus — Find & Compare Best Colleges in India by Budget, Rank & ROI">
+  <meta property="og:description"
+    content="India's smartest college discovery platform. Compare 1,000+ colleges by fees, placements, ROI & your exam rank.">
+  <meta property="og:url" content="https://nextcampus.in/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NextCampus — Best College Finder in India">
+  <meta name="twitter:description"
+    content="Compare colleges by fees, placements & ROI. Find the best college for your rank and budget.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+  <link rel="shortcut icon" href="../favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+  <link rel="manifest" href="../favicon/site.webmanifest">
+  <meta name="theme-color" content="#0056D2">
+
+  <link rel="stylesheet" href="../shared/global.css">
+  <link rel="stylesheet" href="../shared/header.css">
+  <link rel="stylesheet" href="../shared/footer.css">
+  <link rel="stylesheet" href="home.css">
+
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "NextCampus",
+    "alternateName": ["Next Campus", "nextcampus"],
+    "url": "https://nextcampus.in",
+    "description": "India's smartest college discovery platform — find, compare, and afford the best colleges based on rank, budget, and career goals.",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- Structured Data: WebSite (sitelinks search box) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "NextCampus",
+    "alternateName": "Next Campus",
+    "url": "https://nextcampus.in",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://nextcampus.in/colleges?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">&#127891; Trusted by 10,000+ Students</div>
+        <h1>Find the <span class="text-gradient">Best College</span> Within Your Budget</h1>
+        <p class="hero-desc">India's smartest platform to discover, compare, and afford the best college based on your
+          rank, budget, and career goals.</p>
+        <div class="hero-search" id="hero-search">
+          <div class="search-field">
+            <label>Program</label>
+            <select id="search-program" class="form-select">
+              <option value="">All Programs</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Medical">Medical</option>
+              <option value="MBA">MBA</option>
+              <option value="Law">Law</option>
+              <option value="Design">Design</option>
+              <option value="Arts & Science">Arts & Science</option>
+              <option value="Commerce">Commerce</option>
+            </select>
+          </div>
+
+          <div class="search-field">
+            <label>Budget (Total)</label>
+            <select id="search-budget" class="form-select">
+              <option value="">Any Budget</option>
+              <option value="500000">Under &#8377;5 Lakh</option>
+              <option value="1000000">Under &#8377;10 Lakh</option>
+              <option value="1500000">Under &#8377;15 Lakh</option>
+              <option value="2000000">Under &#8377;20 Lakh</option>
+              <option value="2500000">Under &#8377;25 Lakh</option>
+              <option value="3000000">Under &#8377;30 Lakh</option>
+              <option value="4000000">Under &#8377;40 Lakh</option>
+              <option value="5000000">Under &#8377;50 Lakh</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label>Location</label>
+            <select id="search-location" class="form-select">
+              <option value="">All India</option>
+              <option value="Andhra Pradesh">Andhra Pradesh</option>
+              <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+              <option value="Assam">Assam</option>
+              <option value="Bihar">Bihar</option>
+              <option value="Chandigarh">Chandigarh</option>
+              <option value="Chhattisgarh">Chhattisgarh</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Goa">Goa</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Haryana">Haryana</option>
+              <option value="Himachal Pradesh">Himachal Pradesh</option>
+              <option value="Jammu & Kashmir">Jammu &amp; Kashmir</option>
+              <option value="Jharkhand">Jharkhand</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Kerala">Kerala</option>
+              <option value="Ladakh">Ladakh</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Manipur">Manipur</option>
+              <option value="Meghalaya">Meghalaya</option>
+              <option value="Mizoram">Mizoram</option>
+              <option value="Nagaland">Nagaland</option>
+              <option value="Odisha">Odisha</option>
+              <option value="Puducherry">Puducherry</option>
+              <option value="Punjab">Punjab</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Sikkim">Sikkim</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Telangana">Telangana</option>
+              <option value="Tripura">Tripura</option>
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="Uttarakhand">Uttarakhand</option>
+              <option value="West Bengal">West Bengal</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-lg search-btn" id="search-btn">
+            &#128269; Search Colleges
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><strong>1,000+</strong><span>Colleges</span></div>
+          <div class="stat-item"><strong>500+</strong><span>Programs</span></div>
+          <div class="stat-item"><strong>10,000+</strong><span>Students Helped</span></div>
+          <div class="stat-item"><strong>98%</strong><span>Satisfaction Rate</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+  </section>
+
+  <!-- Featured Colleges Section -->
+  <section class="section section-alt" id="featured-section">
+    <div class="container">
+      <div class="flex justify-between items-center mb-3 fade-in">
+        <div>
+          <h2 class="section-title">Featured Colleges</h2>
+          <p class="section-subtitle" style="margin-bottom:0">Handpicked top-rated institutions across India</p>
+        </div>
+        <a href="../colleges/colleges.html" class="btn btn-secondary btn-sm">View All &#8594;</a>
+      </div>
+      <div class="colleges-grid fade-in" id="featured-colleges">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Programs Section -->
+  <section class="section programs-section" id="programs-section">
+    <div class="container">
+      <div class="text-center fade-in">
+        <h2 class="section-title">Explore Top Programs</h2>
+        <p class="section-subtitle">Choose from 9 popular academic streams across India</p>
+      </div>
+      <div class="programs-grid fade-in" id="programs-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Section -->
+  <section class="section roi-section" id="roi-section">
+    <div class="container">
+      <div class="roi-grid fade-in">
+        <div class="roi-content">
+          <h2 class="section-title">Is Your Education Worth the Investment?</h2>
+          <p class="section-subtitle" style="margin-bottom:24px">Our ROI calculator helps you understand the real return
+            on your education investment. Compare fees vs expected salary, calculate loan EMIs, and make informed
+            decisions.</p>
+          <div class="roi-highlights">
+            <div class="roi-item">
+              <div class="roi-icon">&#128200;</div>
+              <div>
+                <h4>ROI Calculator</h4>
+                <p>Compare fees vs average salary after graduation</p>
+              </div>
+            </div>
+            <div class="roi-item">
+              <div class="roi-icon">&#128176;</div>
+              <div>
+                <h4>EMI Planner</h4>
+                <p>Calculate monthly EMIs with our smart loan calculator</p>
+              </div>
+            </div>
+            <div class="roi-item">
+              <div class="roi-icon">&#127919;</div>
+              <div>
+                <h4>Risk Assessment</h4>
+                <p>Know if your education loan is safe or risky</p>
+              </div>
+            </div>
+          </div>
+          <a href="../budget-loan/budget-loan.html" class="btn btn-primary">Try Budget Calculator &#8594;</a>
+        </div>
+        <div class="roi-visual">
+          <div class="roi-card">
+            <div class="roi-card-header">
+              <span>Sample ROI Analysis</span>
+              <span class="badge badge-success">&#10003; Great ROI</span>
+            </div>
+            <div class="roi-card-body">
+              <div class="roi-row"><span>Total Fees</span><strong>&#8377;10,00,000</strong></div>
+              <div class="roi-row"><span>Avg Package</span><strong>&#8377;18,00,000</strong></div>
+              <div class="roi-row"><span>ROI</span><strong class="text-primary">80%</strong></div>
+              <div class="roi-row"><span>Payback Period</span><strong>0.6 years</strong></div>
+              <div class="roi-bar">
+                <div class="roi-bar-fill" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why NextCampus -->
+  <section class="section" id="why-section">
+    <div class="container text-center">
+      <h2 class="section-title fade-in">Why Students Trust NextCampus</h2>
+      <p class="section-subtitle fade-in">Making college decisions smarter, simpler, and stress-free</p>
+      <div class="why-grid fade-in">
+        <div class="why-card">
+          <div class="why-icon">&#128202;</div>
+          <h3>Data-Driven Insights</h3>
+          <p>Every college rated with our proprietary NextCampus Score based on placements, fees, infrastructure, and
+            student reviews.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#9878;</div>
+          <h3>Smart Comparison</h3>
+          <p>Compare up to 3 colleges side-by-side on fees, placements, rankings, ROI, and more to make the right
+            choice.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#128184;</div>
+          <h3>Budget Planning</h3>
+          <p>Plan your education budget with our EMI calculator, loan eligibility checker, and scholarship finder.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#127891;</div>
+          <h3>Rank-Based Search</h3>
+          <p>Enter your exam rank and discover colleges where you have the best chance of admission.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" id="cta-section">
+    <div class="container">
+      <div class="cta-content fade-in">
+        <h2>Take the next step toward your future</h2>
+        <p>Join thousands of students who discovered their perfect college with NextCampus. Start exploring today — it's
+          free.</p>
+        <div class="cta-buttons">
+          <a href="../colleges/colleges.html" class="cta-primary-btn">Explore Colleges</a>
+          <a href="../auth/signup.html" class="cta-outline-btn">Join for Free</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../shared/header.js"></script>
+  <script src="../shared/footer.js"></script>
+  <script src="home.js"></script>
+</body>
+
+</html>

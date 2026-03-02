@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Colleges — NextCampus</title>
+    <meta name="description"
+        content="Compare up to 3 colleges side-by-side on fees, placements, rankings, ROI, and more.">
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="../shared/header.css">
+    <link rel="stylesheet" href="../shared/footer.css">
+    <link rel="stylesheet" href="compare.css">
+</head>
+
+<body>
+    <section class="page-hero">
+        <div class="container">
+            <h1>Compare <span class="text-gradient">Colleges</span></h1>
+            <p>Select up to 3 colleges for a side-by-side comparison</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="compare-selectors" id="compare-selectors">
+                <div class="compare-slot" id="slot-0"><select class="form-select compare-select" data-slot="0">
+                        <option value="">Select College 1</option>
+                    </select><button class="remove-btn" onclick="removeSlot(0)">&#10005;</button></div>
+                <div class="compare-slot" id="slot-1"><select class="form-select compare-select" data-slot="1">
+                        <option value="">Select College 2</option>
+                    </select><button class="remove-btn" onclick="removeSlot(1)">&#10005;</button></div>
+                <div class="compare-slot" id="slot-2"><select class="form-select compare-select" data-slot="2">
+                        <option value="">Select College 3</option>
+                    </select><button class="remove-btn" onclick="removeSlot(2)">&#10005;</button></div>
+            </div>
+            <div class="text-center mt-3">
+                <button class="btn btn-primary btn-lg" id="compare-btn">&#9878; Compare Now</button>
+            </div>
+            <div class="compare-table-container" id="compare-result" style="display:none">
+                <table class="compare-table" id="compare-table"></table>
+            </div>
+        </div>
+    </section>
+    <script src="../shared/header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="compare.js"></script>
+</body>
+
+</html>

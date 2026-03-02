@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs — NextCampus | Explore All Academic Streams</title>
+    <meta name="description"
+        content="Explore Engineering, Medical, MBA, Law, Design, Arts & Science, Commerce, Online Degrees, and Study Abroad programs across India.">
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="../shared/header.css">
+    <link rel="stylesheet" href="../shared/footer.css">
+    <link rel="stylesheet" href="programs.css">
+</head>
+
+<body>
+    <section class="page-hero">
+        <div class="container">
+            <h1>Explore <span class="text-gradient">Programs</span></h1>
+            <p>Discover the right academic stream for your career goals</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="filter-bar" id="filter-bar">
+                <button class="filter-chip active" data-category="">All Programs</button>
+                <button class="filter-chip" data-category="Engineering">Engineering</button>
+                <button class="filter-chip" data-category="Medical">Medical</button>
+                <button class="filter-chip" data-category="MBA">MBA</button>
+                <button class="filter-chip" data-category="Law">Law</button>
+                <button class="filter-chip" data-category="Design">Design</button>
+                <button class="filter-chip" data-category="Arts & Science">Arts & Science</button>
+                <button class="filter-chip" data-category="Commerce">Commerce</button>
+                <button class="filter-chip" data-category="Online Degrees">Online Degrees</button>
+                <button class="filter-chip" data-category="Study Abroad">Study Abroad</button>
+            </div>
+            <div class="programs-detail-grid" id="programs-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <script src="../shared/header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="programs.js"></script>
+</body>
+
+</html>

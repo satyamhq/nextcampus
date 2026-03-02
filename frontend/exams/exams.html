@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrance Exams — NextCampus | JEE, NEET, CAT, CLAT & More</title>
+    <meta name="description"
+        content="Get complete information on all major entrance exams — JEE, NEET, CAT, CLAT, GATE with cutoff trends and top colleges.">
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="../shared/header.css">
+    <link rel="stylesheet" href="../shared/footer.css">
+    <link rel="stylesheet" href="exams.css">
+</head>
+
+<body>
+    <section class="page-hero">
+        <div class="container">
+            <h1>Entrance <span class="text-gradient">Exams</span></h1>
+            <p>Complete guide to India's top entrance examinations</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="exam-filter-bar" id="exam-filters">
+                <button class="filter-chip active" data-cat="">All Exams</button>
+                <button class="filter-chip" data-cat="Engineering">Engineering</button>
+                <button class="filter-chip" data-cat="Medical">Medical</button>
+                <button class="filter-chip" data-cat="MBA">MBA</button>
+                <button class="filter-chip" data-cat="Law">Law</button>
+            </div>
+            <div class="exams-grid" id="exams-grid"></div>
+            <div class="exam-detail-modal" id="exam-modal" style="display:none"></div>
+        </div>
+    </section>
+    <script src="../shared/header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="exams.js"></script>
+</body>
+
+</html>

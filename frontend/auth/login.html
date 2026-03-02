@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — NextCampus</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="../shared/header.css">
+    <link rel="stylesheet" href="../shared/footer.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <section class="auth-section">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="../home/home.html" class="nc-logo" style="justify-content:center">
+                    <span class="nc-wordmark">Next<span>Campus</span></span>
+                </a>
+                <h1>Welcome Back</h1>
+                <p>Login to access your dashboard, saved colleges, and more.</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group"><label class="form-label">Email</label><input type="email" id="login-email"
+                        class="form-input" placeholder="you@example.com" required></div>
+                <div class="form-group"><label class="form-label">Password</label><input type="password"
+                        id="login-password" class="form-input" placeholder="Enter your password" required></div>
+                <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Login &#8594;</button>
+                <div class="auth-error" id="login-error" style="display:none"></div>
+            </form>
+            <div class="auth-footer">Don't have an account? <a href="signup.html">Sign Up</a></div>
+        </div>
+    </section>
+    <script src="../shared/header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

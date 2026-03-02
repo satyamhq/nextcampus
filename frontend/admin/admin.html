@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — NextCampus</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="../shared/header.css">
+    <link rel="stylesheet" href="../shared/footer.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <section class="page-hero">
+        <div class="container">
+            <h1>Admin <span class="text-gradient">Panel</span></h1>
+            <p>Manage colleges, users, programs, and analytics</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <!-- Stats Cards -->
+            <div class="admin-stats" id="admin-stats"></div>
+            <!-- Tabs -->
+            <div class="dash-tabs">
+                <button class="dash-tab active" data-tab="colleges">&#127963; Colleges</button>
+                <button class="dash-tab" data-tab="users">&#128100; Users</button>
+                <button class="dash-tab" data-tab="programs">&#128218; Programs</button>
+            </div>
+            <div class="dash-content active" id="tab-colleges">
+                <div class="admin-toolbar">
+                    <h3>Manage Colleges</h3><button class="btn btn-primary btn-sm" id="add-college-btn">+ Add
+                        College</button>
+                </div>
+                <div id="colleges-table"></div>
+            </div>
+            <div class="dash-content" id="tab-users">
+                <div class="admin-toolbar">
+                    <h3>Manage Users</h3>
+                </div>
+                <div id="users-table"></div>
+            </div>
+            <div class="dash-content" id="tab-programs">
+                <div class="admin-toolbar">
+                    <h3>Manage Programs</h3>
+                </div>
+                <div id="programs-table"></div>
+            </div>
+        </div>
+    </section>
+    <script src="../shared/header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

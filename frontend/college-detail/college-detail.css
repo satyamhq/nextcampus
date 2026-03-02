@@ -1,0 +1,360 @@
+/* College Detail Page Styles */
+.detail-hero {
+    padding: 60px 0 40px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+}
+
+.detail-hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.detail-hero-info h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.detail-hero-info .location {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.detail-hero-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.detail-hero-score {
+    text-align: center;
+}
+
+.detail-hero-score .score-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.detail-hero-score .score-circle small {
+    font-size: 0.6rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.detail-hero-score span {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.hero-stats-row {
+    display: flex;
+    gap: 32px;
+}
+
+.hero-stat-item strong {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.hero-stat-item span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* Tabs */
+.detail-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 32px;
+    overflow-x: auto;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    color: var(--primary);
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+/* Layout */
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 32px;
+    align-items: start;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Content Cards */
+.detail-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.detail-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.stat-box {
+    padding: 20px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.stat-box .val {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.stat-box .lbl {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Fee Table */
+.fee-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fee-table th,
+.fee-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.fee-table th {
+    font-weight: 700;
+    background: var(--bg-secondary);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Placement Bar Chart */
+.placement-bars {
+    margin-top: 16px;
+}
+
+.p-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.p-bar-label {
+    width: 120px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.p-bar-track {
+    flex: 1;
+    height: 24px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.p-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), #7c3aed);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    transition: width 1s ease;
+}
+
+/* Recruiter Chips */
+.recruiter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.recruiter-chip {
+    padding: 8px 16px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* Infrastructure */
+.infra-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.infra-item {
+    padding: 16px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.infra-item .icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.infra-item strong {
+    display: block;
+    font-weight: 700;
+}
+
+/* Reviews */
+.review-card {
+    padding: 20px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.review-author {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.review-rating {
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+.review-card p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Sidebar */
+.detail-sidebar .detail-card {
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+}
+
+.sidebar-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-actions .btn {
+    width: 100%;
+}
+
+.sidebar-highlights li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-highlights li::before {
+    content: '&#10003;';
+    color: var(--success);
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .detail-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid,
+    .infra-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-stats-row {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .detail-hero-info h1 {
+        font-size: 1.5rem;
+    }
+
+    .stats-grid,
+    .infra-grid {
+        grid-template-columns: 1fr;
+    }
+}

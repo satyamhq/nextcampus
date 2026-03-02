@@ -1,0 +1,235 @@
+/* Exams Page Styles */
+.page-hero {
+    padding: 80px 0 48px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe, #e0e7ff);
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.page-hero p {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.exam-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+}
+
+.filter-chip {
+    padding: 8px 20px;
+    border-radius: var(--radius-full);
+    font-size: 0.88rem;
+    font-weight: 500;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.exams-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.exam-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.exam-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), #7c3aed);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.exam-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.exam-card:hover::before {
+    opacity: 1;
+}
+
+.exam-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.exam-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.exam-card .category-badge {
+    font-size: 0.7rem;
+}
+
+.exam-card .full-name {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.exam-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.exam-meta-item label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+}
+
+.exam-meta-item strong {
+    font-size: 0.88rem;
+    color: var(--text);
+}
+
+.exam-subjects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.exam-subjects .badge {
+    font-size: 0.7rem;
+}
+
+/* Cutoff Chart */
+.cutoff-chart {
+    margin-top: 16px;
+}
+
+.cutoff-chart h4 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.chart-canvas {
+    width: 100%;
+    height: 200px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    position: relative;
+}
+
+/* Expanded exam detail */
+.exam-expanded {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 40px;
+    margin-top: 32px;
+}
+
+.exam-expanded h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.exam-expanded .subtitle {
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+.exam-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.exam-detail-box {
+    padding: 16px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.exam-detail-box .val {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.exam-detail-box .lbl {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.top-colleges-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.top-colleges-list .recruiter-chip {
+    padding: 8px 16px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .exams-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exam-detail-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .page-hero h1 {
+        font-size: 2rem;
+    }
+}
