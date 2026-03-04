@@ -1,0 +1,293 @@
+const fs = require('fs');
+const path = require('path');
+const { getTabsHtml, getJsContent, getFullCss } = require('./gen_utils.js');
+
+const basePath = path.join(__dirname, 'frontend', 'colleges');
+const homeJsPath = path.join(__dirname, 'frontend', 'home', 'home.js');
+
+function slugify(text) {
+    if (!text) return 'unknown';
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '');
+}
+
+const tgTechColleges = [
+    // Top Government Engineering Colleges in Telangana
+    { name: "Indian Institute of Technology Hyderabad", abbr: "IITH", city: "Sangareddy", type: "Government", est: 2008, category: "Engineering" },
+    { name: "National Institute of Technology Warangal", abbr: "NITW", city: "Warangal", type: "Government", est: 1959, category: "Engineering" },
+    { name: "International Institute of Information Technology Hyderabad", abbr: "IIIT Hyderabad", city: "Hyderabad", type: "PPP Mode", est: 1998, category: "Engineering" },
+    { name: "University College of Engineering Osmania University", abbr: "UCE OU", city: "Hyderabad", type: "State", est: 1929, category: "Engineering" },
+    { name: "Jawaharlal Nehru Technological University Hyderabad College of Engineering", abbr: "JNTUH CEH", city: "Hyderabad", type: "State", est: 1965, category: "Engineering" },
+    { name: "University of Hyderabad", abbr: "UoH", city: "Hyderabad", type: "Central", est: 1974, category: "Multidisciplinary" }, // Has Tech Depts
+    { name: "Kakatiya University College of Engineering and Technology", abbr: "KU CET", city: "Warangal", type: "State", est: 1997, category: "Engineering" },
+    { name: "Rajiv Gandhi University of Knowledge Technologies Basar", abbr: "RGUKT Basar", city: "Basar", type: "State", est: 2008, category: "Engineering" },
+    { name: "Osmania University College of Technology", abbr: "OUCT", city: "Hyderabad", type: "State", est: 1969, category: "Engineering" },
+
+    // Top Private Engineering Colleges in Telangana
+    { name: "BITS Pilani Hyderabad Campus", abbr: "BITS Hyderabad", city: "Hyderabad", type: "Private", est: 2008, category: "Engineering" },
+    { name: "Chaitanya Bharathi Institute of Technology", abbr: "CBIT", city: "Hyderabad", type: "Private", est: 1979, category: "Engineering" },
+    { name: "VNR Vignana Jyothi Institute of Engineering and Technology", abbr: "VNR VJIET", city: "Hyderabad", type: "Private", est: 1995, category: "Engineering" },
+    { name: "Vasavi College of Engineering", abbr: "VCE", city: "Hyderabad", type: "Private", est: 1981, category: "Engineering" },
+    { name: "CVR College of Engineering", abbr: "CVR", city: "Ibrahimpatnam", type: "Private", est: 2001, category: "Engineering" },
+    { name: "Gokaraju Rangaraju Institute of Engineering and Technology", abbr: "GRIET", city: "Hyderabad", type: "Private", est: 1997, category: "Engineering" },
+    { name: "Sreenidhi Institute of Science and Technology", abbr: "SNIST", city: "Ghatkesar", type: "Private", est: 1997, category: "Engineering" },
+    { name: "Vardhaman College of Engineering", abbr: "VCE", city: "Shamshabad", type: "Private", est: 1999, category: "Engineering" },
+    { name: "Mahatma Gandhi Institute of Technology", abbr: "MGIT", city: "Hyderabad", type: "Private", est: 1997, category: "Engineering" },
+    { name: "MLR Institute of Technology", abbr: "MLRIT", city: "Hyderabad", type: "Private", est: 2005, category: "Engineering" },
+    { name: "BVRIT Narsapur", abbr: "BVRIT", city: "Narsapur", type: "Private", est: 1997, category: "Engineering" },
+    { name: "Guru Nanak Institutions Technical Campus", abbr: "GNITC", city: "Ibrahimpatnam", type: "Private", est: 2001, category: "Engineering" },
+    { name: "Institute of Aeronautical Engineering", abbr: "IARE", city: "Hyderabad", type: "Private", est: 2000, category: "Engineering" },
+    { name: "Anurag University", abbr: "AU", city: "Hyderabad", type: "Private", est: 2020, category: "Engineering" },
+    { name: "SR University", abbr: "SRU", city: "Warangal", type: "Private", est: 2002, category: "Engineering" }
+];
+
+function generateHtml(col, collegeSlug) {
+    let isElite = col.abbr.includes("IIT") || col.abbr === "NITW" || col.abbr === "BITS Hyderabad";
+    let isGovtState = col.type === "State";
+
+    let coursesHtml = `<tr><td><strong>B.Tech</strong></td><td>4 Years</td><td>\u20B9${isElite ? '8L' : (isGovtState ? '1L' : '4L')} — \u20B9${isElite ? '18L' : '6L'}</td><td>10+2 PCM + ${isElite ? (col.abbr === "BITS Hyderabad" ? 'BITSAT' : 'JEE Main/Adv') : (col.abbr === "RGUKT Basar" ? '10th Merit (Rural Area Quota)' : 'TS EAMCET')}</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>
+                 <tr><td><strong>M.Tech</strong></td><td>2 Years</td><td>\u20B91L — \u20B93L</td><td>B.Tech + GATE / TS PGECET</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>`;
+
+    let admissionHtml = isElite ? (col.abbr === "BITS Hyderabad" ? "Exclusively through BITSAT." : "JoSAA / CSAB counseling.") : "TS EAMCET handles majority of the seats! The TSCHE oversees the admissions process. Osmania and JNTUH colleges have the toughest TS EAMCET cut-offs.";
+    if (col.abbr === "RGUKT Basar") admissionHtml = "Unique 6-Year Integrated B.Tech format directly admitting predominantly rural 10th-grade toppers using state GPA merit formulas.";
+
+    let placementInfo = isElite ? "Premium packages from MAANG and core engineering giants." : "Deep integration with Hyderabad's colossal IT infrastructure yielding massive tier-1 service company recruitments alongside significant product-based SaaS/Fintech intakes.";
+
+    const tabsHtml = getTabsHtml(col.category);
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${col.name} (${col.abbr}) - Admission, Fees, Placements & Courses 2026 | NextCampus</title>
+    <meta name="description" content="Explore ${col.name} admissions 2026, courses, detailed fee structure, placement packages, scholarships, and campus life. Get verified details at NextCampus.">
+    <meta name="keywords" content="${col.name}, ${col.abbr}, TS EAMCET, Telangana Engineering, Hyderabad Tech, NextCampus">
+    <link rel="icon" type="image/svg+xml" href="../../../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../../../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="${collegeSlug}.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "${col.name}",
+      "alternateName": "${col.abbr}",
+      "url": "https://nextcampus.com/colleges/telangana/${collegeSlug}/${collegeSlug}.html",
+      "logo": "https://nextcampus.com/colleges/telangana/${collegeSlug}/images/logo/${collegeSlug}_logo.png"
+    }
+    </script>
+</head>
+<body>
+
+    <div class="lpu-sticky-header" id="lpu-sticky-header">
+        <div class="container lpu-sticky-inner">
+            <div class="lpu-sticky-left">
+                <span class="lpu-sticky-name">${col.name}</span>
+                <span class="lpu-sticky-loc">&#128205; ${col.city}, TS</span>
+            </div>
+            <a href="#" class="btn-lpu-apply">Apply Now &#8594;</a>
+        </div>
+    </div>
+
+    <section class="lpu-hero" id="lpu-hero"
+        style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)), url('images/cover/${collegeSlug}_cover.png'); background-size: cover; background-position: center;">
+        <div class="container">
+            <div class="lpu-hero-grid">
+                <div class="lpu-hero-info">
+                    <img src="images/logo/${collegeSlug}_logo.png" alt="Official Logo of ${col.name} - NextCampus" class="lpu-logo-img">
+                    <div>
+                        <h1>${col.name} <span class="lpu-abbr">(${col.abbr})</span></h1>
+                        <p class="lpu-location">&#128205; ${col.city}, Telangana, India</p>
+                        <div class="lpu-rating">
+                            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                            <strong>4.4</strong>/5
+                        </div>
+                        <div class="lpu-meta">
+                            <span>Est. <strong>${col.est}</strong></span>
+                            <span class="divider">|</span>
+                            <span>Type: <strong>${col.type}</strong></span>
+                        </div>
+                        <div class="lpu-ctas">
+                            <a href="#" class="btn-lpu-apply">Apply Now &#8594;</a>
+                            <a href="#" class="btn-lpu-brochure" onclick="alert('Brochure download coming soon!');return false;">&#128196; Download Brochure</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+${tabsHtml}
+
+    <main class="lpu-main">
+        <div class="container">
+
+            <!-- OVERVIEW -->
+            <section class="lpu-panel active" id="panel-overview">
+                <div class="lpu-card">
+                    <h2>About ${col.name}</h2>
+                    <p>${col.name} (${col.abbr}) represents the premier tier of engineering capability within Telangana. Serving as a crucial artery for the 'Cyberabad' technology hub mapping towards thousands of tech deployments annually.</p>
+                </div>
+                
+                <div class="lpu-card">
+                    <div class="overview-section-header">
+                        <h3>&#128218; Top Courses &amp; Eligibility</h3>
+                        <button class="btn-view-tab" data-target="courses">View All &#8594;</button>
+                    </div>
+                    <div class="table-scroll">
+                        <table class="lpu-table">
+                            <thead><tr><th>Course</th><th>Duration</th><th>Total Fees (Approx.)</th><th>Eligibility</th><th>Apply</th></tr></thead>
+                            <tbody>
+                                ${coursesHtml}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="lpu-card">
+                    <h3>Admissions Route</h3>
+                    <p>${admissionHtml}</p>
+                    <button class="btn-view-tab" data-target="admission" style="margin-top: 10px;">View Admission Process &#8594;</button>
+                </div>
+            </section>
+            
+            <!-- COURSES & FEES -->
+            <section class="lpu-panel" id="panel-courses">
+                <div class="lpu-card">
+                    <h2>Academic Programs</h2>
+                    <div class="table-scroll">
+                        <table class="lpu-table">
+                            <thead><tr><th>Course</th><th>Duration</th><th>Total Fees (Approx.)</th><th>Eligibility</th><th>Apply</th></tr></thead>
+                            <tbody>
+                                ${coursesHtml}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ADMISSION -->
+            <section class="lpu-panel" id="panel-admission">
+                <div class="lpu-card">
+                    <h2>Admission Information</h2>
+                    <div class="steps-list">
+                        <div class="step-item"><div class="step-num">1</div><div><h4>Entrance Matrix</h4><p>${admissionHtml}</p></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PLACEMENTS -->
+            <section class="lpu-panel" id="panel-placements">
+                <div class="lpu-card">
+                    <h2>Career & Placements</h2>
+                    <p>${placementInfo}</p>
+                </div>
+            </section>
+
+            <!-- REVIEWS -->
+            <section class="lpu-panel" id="panel-reviews">
+                <div class="lpu-card">
+                    <h2>Student Reviews</h2>
+                    <p>Average Rating: <strong>4.4 / 5</strong></p>
+                    <div class="review-item">
+                        <div class="review-top"><strong>Verified Scholar</strong><span class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span></div>
+                        <p>"Incredible access to the sprawling tech parks in Hyderabad means massive placement pool diversity spanning mechanical cores to the bleeding edge of AI/ML architectures."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GALLERY -->
+            <section class="lpu-panel" id="panel-gallery">
+                <div class="lpu-card">
+                    <h2>Campus Gallery</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item"><div class="gallery-placeholder">&#127963;</div><span>Main Building</span></div>
+                        <div class="gallery-item"><div class="gallery-placeholder">&#128218;</div><span>Libraries & Grounds</span></div>
+                        <div class="gallery-item"><div class="gallery-placeholder">&#127968;</div><span>Hostels & Tech Parks</span></div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div class="mobile-apply-bar" id="mobile-apply-bar">
+        <a href="#" class="btn-lpu-apply mobile-apply-btn">Apply Now &#8594;</a>
+    </div>
+
+    <script src="${collegeSlug}.js"></script>
+</body>
+</html>`;
+}
+
+function processAll() {
+    const newCards = [];
+    let homeContent = fs.readFileSync(homeJsPath, 'utf8');
+
+    for (const col of tgTechColleges) {
+        const collegeSlug = slugify(col.name);
+
+        // Check dupe (Since IIT, NIT, JNTU, and most private ones were added literally one prompt ago, they will be skipped, but unique new ones like RGUKT or specific campuses get added)
+        if (homeContent.includes(collegeSlug)) {
+            console.log(`Skipping \${col.name} (\${collegeSlug}) - Already exists.`);
+            continue;
+        }
+
+        const dir = path.join(basePath, 'telangana', collegeSlug);
+        fs.mkdirSync(path.join(dir, 'images', 'logo'), { recursive: true });
+        fs.mkdirSync(path.join(dir, 'images', 'cover'), { recursive: true });
+
+        // CSS base
+        const lpuBaseCssPath = path.join(basePath, 'punjab', 'lovely-professional-university', 'lovely-professional-university.css');
+        fs.writeFileSync(path.join(dir, collegeSlug + '.css'), getFullCss());
+
+        // HTML/JS
+        fs.writeFileSync(path.join(dir, collegeSlug + '.html'), generateHtml(col, collegeSlug), 'utf8');
+        fs.writeFileSync(path.join(dir, collegeSlug + '.js'), getJsContent(col.name, col.abbr, col.slug || collegeSlug), 'utf8');
+
+        let baseScore = 8.3; // Default
+        if (col.abbr.includes("IIT") || col.abbr === "NITW" || col.type === "State") baseScore = 9.4;
+        else if (col.abbr === "BITS Hyderabad") baseScore = 9.5;
+
+        newCards.push(`    {
+      name: '${col.name.replace(/'/g, "\\'")}',
+      city: '${col.city}', state: 'Telangana', type: '${col.type}',
+      score: ${baseScore}, totalFees: 'Variable', avgPackage: 'Variable',
+      placementRate: ${baseScore > 8.5 ? 92 : 82}, nirf: 0,
+      link: '../colleges/telangana/${collegeSlug}/${collegeSlug}.html',
+      rating: '4.4', accr: '${col.type}'
+    }`);
+        console.log(`Generated: ${col.name} (${collegeSlug})`);
+    }
+
+    // Inject
+    if (newCards.length > 0) {
+        const injectToken = "const colleges = [";
+        const injectionPoint = homeContent.indexOf(injectToken);
+
+        if (injectionPoint !== -1) {
+            const startOfArray = injectionPoint + injectToken.length;
+            homeContent = homeContent.slice(0, startOfArray) + "\n" + newCards.join(",\n") + ",\n" + homeContent.slice(startOfArray);
+            fs.writeFileSync(homeJsPath, homeContent, 'utf8');
+            console.log(`\n✅ Injected ${newCards.length} specialized Telangana Tech Institutes into home.js !`);
+        } else {
+            console.log("\n❌ Could not find injection point in home.js.");
+        }
+    } else {
+        console.log(`\n❌ No new Telangana Colleges to inject (already deduplicated).`);
+    }
+}
+
+processAll();

@@ -6,13 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Details — NextCampus</title>
     <meta name="description"
-        content="View detailed information about this college including fees, placements, reviews, infrastructure, and admission process.">
+        content="View detailed information about this college including courses, fees, placements, admission process, scholarships, reviews, and campus gallery.">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
     <link rel="shortcut icon" href="../favicon/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="manifest" hre f="../favicon/site.webmanifest">
     <meta name="theme-color" content="#0056D2">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="../shared/global.css">
     <link rel="stylesheet" href="../shared/header.css">
     <link rel="stylesheet" href="../shared/footer.css">
@@ -20,38 +29,61 @@
 </head>
 
 <body>
-    <section class="detail-hero" id="detail-hero">
+
+    <!-- Sticky College Header (shown on scroll) -->
+    <div class="cd-sticky-header" id="cd-sticky-header">
+        <div class="container cd-sticky-inner">
+            <div class="cd-sticky-left">
+                <span class="cd-sticky-name" id="cd-sticky-name"></span>
+                <span class="cd-sticky-loc" id="cd-sticky-loc"></span>
+            </div>
+            <a href="#" class="btn-cd-apply" id="cd-sticky-apply" target="_blank">Apply Now &#8594;</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="cd-hero" id="cd-hero">
         <div class="container">
-            <div class="detail-hero-content" id="hero-content">
+            <div class="cd-hero-grid" id="hero-content">
                 <!-- Populated by JS -->
+                <div class="cd-loading">Loading college details...</div>
             </div>
         </div>
     </section>
 
-    <section class="section-sm">
+    <!-- Tab Navigation -->
+    <nav class="cd-tabs-nav" id="cd-tabs-nav">
         <div class="container">
-            <div class="detail-tabs" id="detail-tabs">
-                <button class="tab-btn active" data-tab="overview">Overview</button>
-                <button class="tab-btn" data-tab="fees">Fees & Programs</button>
-                <button class="tab-btn" data-tab="placements">Placements</button>
-                <button class="tab-btn" data-tab="infrastructure">Infrastructure</button>
-                <button class="tab-btn" data-tab="reviews">Reviews</button>
-                <button class="tab-btn" data-tab="admission">Admission</button>
-            </div>
-
-            <div class="detail-layout">
-                <div class="detail-main">
-                    <div class="tab-content active" id="tab-overview"></div>
-                    <div class="tab-content" id="tab-fees"></div>
-                    <div class="tab-content" id="tab-placements"></div>
-                    <div class="tab-content" id="tab-infrastructure"></div>
-                    <div class="tab-content" id="tab-reviews"></div>
-                    <div class="tab-content" id="tab-admission"></div>
-                </div>
-                <aside class="detail-sidebar" id="detail-sidebar"></aside>
+            <div class="cd-tabs" id="cd-tabs">
+                <button class="cd-tab active" data-tab="overview">Overview</button>
+                <button class="cd-tab" data-tab="courses">Courses &amp; Fees</button>
+                <button class="cd-tab" data-tab="admission">Admission</button>
+                <button class="cd-tab" data-tab="fees">Fees &amp; Scholarships</button>
+                <button class="cd-tab" data-tab="placements">Placements</button>
+                <button class="cd-tab" data-tab="reviews">Reviews</button>
+                <button class="cd-tab" data-tab="gallery">Gallery</button>
             </div>
         </div>
-    </section>
+    </nav>
+
+    <!-- Tab Content -->
+    <main class="cd-main">
+        <div class="container">
+            <section class="cd-panel active" id="panel-overview"></section>
+            <section class="cd-panel" id="panel-courses"></section>
+            <section class="cd-panel" id="panel-admission"></section>
+            <section class="cd-panel" id="panel-fees"></section>
+            <section class="cd-panel" id="panel-placements"></section>
+            <section class="cd-panel" id="panel-reviews"></section>
+            <section class="cd-panel" id="panel-gallery"></section>
+        </div>
+    </main>
+
+    <!-- Mobile Apply Bar -->
+    <div class="cd-mobile-apply" id="cd-mobile-apply">
+        <a href="#" class="btn-cd-apply cd-mobile-apply-btn" id="cd-mobile-apply-link" target="_blank">Apply Now
+            &#8594;</a>
+    </div>
 
     <script src="../shared/header.js"></script>
     <script src="../shared/footer.js"></script>

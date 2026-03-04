@@ -27,7 +27,9 @@ const collegeSchema = new mongoose.Schema({
         specialization: { type: String },
         duration: { type: String },
         fees: { type: Number },
-        seats: { type: Number }
+        totalFees: { type: Number },
+        seats: { type: Number },
+        eligibility: { type: String }
     }],
     totalFees: { type: Number, required: true },
     avgPackage: { type: Number, required: true },
@@ -63,9 +65,36 @@ const collegeSchema = new mongoose.Schema({
     },
     image: { type: String, default: '' },
     gallery: [{ type: String }],
+    galleryLabels: [{ type: String }],
     website: { type: String, default: '' },
     description: { type: String, default: '' },
-    highlights: [{ type: String }]
+    highlights: [{ type: String }],
+    // New fields for rich detail pages
+    scholarships: [{
+        name: { type: String },
+        description: { type: String },
+        range: { type: String }
+    }],
+    admissionSteps: [{
+        step: { type: Number },
+        title: { type: String },
+        description: { type: String }
+    }],
+    eligibility: [{ type: String }],
+    importantDates: [{
+        event: { type: String },
+        date: { type: String }
+    }],
+    placementTrends: [{
+        year: { type: String },
+        rate: { type: Number }
+    }],
+    staticReviews: [{
+        name: { type: String },
+        course: { type: String },
+        rating: { type: Number },
+        comment: { type: String }
+    }]
 }, { timestamps: true });
 
 // Generate slug from name

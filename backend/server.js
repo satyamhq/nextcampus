@@ -45,6 +45,13 @@ app.get('/college/:id', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'college-detail', 'college-detail.html'));
 });
 
+// Dedicated college detail page by slug (template-driven)
+app.get('/colleges/:slug', (req, res, next) => {
+    // Skip if slug looks like a static file extension
+    if (req.params.slug.includes('.')) return next();
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'college-detail', 'college-detail.html'));
+});
+
 app.get('/compare', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'compare', 'compare.html'));
 });

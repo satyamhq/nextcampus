@@ -1,10 +1,9 @@
 /* Header component — injected on every page */
 
-// Resolve relative path from current page to another page
+// Resolve path from current page to another page
 function pagePath(page) {
-    // page = 'home', 'programs', 'colleges', 'compare', 'exams', 'placements', 'budget-loan', 'college-detail', 'login', 'signup', 'dashboard', 'admin'
     const loc = window.location.pathname;
-    // If running on Express server (no .html in URL), use server routes
+    // If running on Express server (no .html in URL and not /frontend/), use server routes
     if (!loc.includes('.html') && !loc.includes('/frontend/')) {
         const map = {
             'home': '/', 'programs': '/programs', 'colleges': '/colleges',
@@ -14,22 +13,32 @@ function pagePath(page) {
         };
         return map[page] || '/';
     }
-    // Otherwise use relative HTML file paths
-    const map = {
-        'home': '../home/home.html',
-        'programs': '../programs/programs.html',
-        'colleges': '../colleges/colleges.html',
-        'compare': '../compare/compare.html',
-        'exams': '../exams/exams.html',
-        'placements': '../placements/placements.html',
-        'budget-loan': '../budget-loan/budget-loan.html',
-        'college-detail': '../college-detail/college-detail.html',
-        'login': '../auth/login.html',
-        'signup': '../auth/signup.html',
-        'dashboard': '../dashboard/dashboard.html',
-        'admin': '../admin/admin.html'
+    // Target paths relative to frontend/
+    const targetMap = {
+        'home': 'home/home.html',
+        'programs': 'programs/programs.html',
+        'colleges': 'colleges/colleges.html',
+        'compare': 'compare/compare.html',
+        'exams': 'exams/exams.html',
+        'placements': 'placements/placements.html',
+        'budget-loan': 'budget-loan/budget-loan.html',
+        'college-detail': 'college-detail/college-detail.html',
+        'login': 'auth/login.html',
+        'signup': 'auth/signup.html',
+        'dashboard': 'dashboard/dashboard.html',
+        'admin': 'admin/admin.html'
     };
-    return map[page] || '../home/home.html';
+    const target = targetMap[page];
+    if (!target) return '/frontend/home/home.html';
+
+    // Use absolute path from site root for reliability across all nesting depths
+    const frontendIdx = loc.indexOf('/frontend/');
+    if (frontendIdx !== -1) {
+        const basePath = loc.substring(0, frontendIdx) + '/frontend/';
+        return basePath + target;
+    }
+    // Fallback: relative path
+    return target;
 }
 
 function initHeader() {

@@ -271,14 +271,40 @@
     background: var(--bg-secondary);
 }
 
-/* --- Featured Colleges Grid --- */
+/* --- Featured Colleges Grid (Horizontal Scroll) --- */
 .colleges-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 16px;
+}
+
+.colleges-grid::-webkit-scrollbar {
+    height: 6px;
+}
+
+.colleges-grid::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 3px;
+}
+
+.colleges-grid::-webkit-scrollbar-thumb {
+    background: var(--primary-200);
+    border-radius: 3px;
+}
+
+.colleges-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
 }
 
 .college-card {
+    min-width: 340px;
+    max-width: 340px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
@@ -324,6 +350,32 @@
     justify-content: center;
     font-size: 0.85rem;
     font-weight: 800;
+}
+
+.college-card-badges {
+    padding: 10px 24px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+}
+
+.card-badge-rating {
+    padding: 4px 10px;
+    background: #fff8e1;
+    color: #b8860b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 4px;
+}
+
+.card-badge-accr {
+    padding: 4px 10px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 4px;
 }
 
 .college-card-body {
@@ -601,8 +653,9 @@
         min-width: 45%;
     }
 
-    .colleges-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .college-card {
+        min-width: 300px;
+        max-width: 300px;
     }
 
     .roi-grid {
@@ -655,8 +708,9 @@
         grid-template-columns: 1fr;
     }
 
-    .colleges-grid {
-        grid-template-columns: 1fr;
+    .college-card {
+        min-width: 280px;
+        max-width: 280px;
     }
 
     .why-grid {

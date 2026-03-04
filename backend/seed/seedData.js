@@ -381,6 +381,78 @@ const colleges = [
         cutoff: { general: 500, obc: 800, sc: 2000, st: 1500 },
         description: 'One of the finest government engineering universities in eastern India.',
         highlights: ['Ranked #6 Engineering', 'Extremely affordable', '89% placement rate', 'Strong research culture']
+    },
+    {
+        name: 'Lovely Professional University',
+        slug: 'lpu',
+        location: { city: 'Phagwara', state: 'Punjab' },
+        type: 'Private',
+        established: 2005,
+        accreditation: 'NAAC A++',
+        programs: [
+            { name: 'B.Tech', specialization: 'Computer Science', duration: '4 years', fees: 315000, totalFees: 1260000, seats: 500, eligibility: '10+2 with PCM, JEE/LPUNEST' },
+            { name: 'MBA', specialization: 'Management', duration: '2 years', fees: 310000, totalFees: 620000, seats: 300, eligibility: 'Graduation, CAT/MAT/LPUNEST' },
+            { name: 'BCA', specialization: 'Computer Applications', duration: '3 years', fees: 150000, totalFees: 450000, seats: 400, eligibility: '10+2 any stream, LPUNEST' },
+            { name: 'MCA', specialization: 'Computer Applications', duration: '2 years', fees: 175000, totalFees: 350000, seats: 200, eligibility: 'BCA/B.Sc(CS), LPUNEST' },
+            { name: 'B.Pharm', specialization: 'Pharmacy', duration: '4 years', fees: 150000, totalFees: 600000, seats: 150, eligibility: '10+2 with PCB/PCM' },
+            { name: 'BA LLB', specialization: 'Law', duration: '5 years', fees: 150000, totalFees: 750000, seats: 120, eligibility: '10+2 any stream, CLAT/LPUNEST' },
+            { name: 'BBA', specialization: 'Management', duration: '3 years', fees: 160000, totalFees: 480000, seats: 350, eligibility: '10+2 any stream, LPUNEST' },
+            { name: 'M.Tech', specialization: 'Engineering', duration: '2 years', fees: 160000, totalFees: 320000, seats: 100, eligibility: 'B.Tech, GATE/LPUNEST' }
+        ],
+        totalFees: 1260000,
+        avgPackage: 720000,
+        highestPackage: 32000000,
+        medianPackage: 550000,
+        placementRate: 85,
+        ranking: { nirf: 38, nextcampus: 8.2 },
+        nextcampusScore: 8.2,
+        recruiters: ['Amazon', 'Microsoft', 'Google', 'TCS', 'Infosys', 'Wipro', 'Deloitte', 'Capgemini', 'HCL', 'Cognizant', 'Accenture', 'IBM', 'Samsung', 'Flipkart', 'Byju\'s', 'Zomato'],
+        infrastructure: { campus: '600 acres', hostel: true, library: true, labs: 80, sportsFacilities: true, wifi: true },
+        admissionProcess: 'LPUNEST score-based admission or JEE/CAT/CLAT scores',
+        examAccepted: ['LPUNEST', 'JEE Main', 'CAT', 'MAT', 'CLAT', 'GATE'],
+        cutoff: { general: 20000, obc: 30000, sc: 50000, st: 45000 },
+        website: 'https://www.lpu.in',
+        description: 'Lovely Professional University (LPU) is one of India\'s largest private universities, located in Phagwara, Punjab. Established in 2005, LPU offers over 200 programs across Engineering, Management, Law, Pharmacy, Design, Agriculture, Sciences, and more. The university sprawls across a 600+ acre campus and is recognized by UGC, accredited NAAC A++, and approved by AICTE. With a strong emphasis on research, innovation, and entrepreneurship, LPU has emerged as a preferred destination for students seeking quality education at competitive fee structures.',
+        highlights: ['30,000+ students', '200+ programs', '600+ acre campus', '100% placement assistance', 'NAAC A++ accredited', 'NIRF Rank #38'],
+        galleryLabels: ['Main Gate', 'Library', 'Hostel', 'Sports Complex', 'Auditorium', 'Labs'],
+        scholarships: [
+            { name: 'Merit-Based Scholarship', description: 'Up to 100% tuition fee waiver based on LPUNEST score, JEE rank, board marks, or other national exam scores.', range: '₹25,000 — Full Tuition' },
+            { name: 'Sports Quota Scholarship', description: 'Special scholarships for national and state-level sports achievers. Includes free hostel and tuition concessions.', range: '25% — 100% Fee Waiver' },
+            { name: 'NRI / International Quota', description: 'Scholarships for NRI and international students based on academic performance and entrance test scores.', range: '10% — 50% Fee Waiver' }
+        ],
+        admissionSteps: [
+            { step: 1, title: 'Register Online', description: 'Visit the LPU admissions portal and create your profile with basic details.' },
+            { step: 2, title: 'Choose Your Program', description: 'Select your preferred program and specialization from 200+ available options.' },
+            { step: 3, title: 'Appear for LPUNEST / Submit Scores', description: 'Take the LPU National Entrance and Scholarship Test (LPUNEST) or submit valid national exam scores (JEE, CAT, CLAT, etc.).' },
+            { step: 4, title: 'Receive Offer Letter', description: 'Based on your scores and merit, you will receive an admission offer letter.' },
+            { step: 5, title: 'Pay Fees & Confirm Admission', description: 'Complete fee payment and document verification to confirm your seat.' }
+        ],
+        eligibility: [
+            'B.Tech: 10+2 with minimum 60% in PCM. Valid JEE Main or LPUNEST score.',
+            'MBA: Graduation with 50%. Valid CAT / MAT / LPUNEST score.',
+            'BCA / BBA: 10+2 in any stream with 50%. LPUNEST recommended.',
+            'Law (BA LLB): 10+2 with 50%. Valid CLAT or LPUNEST score.',
+            'B.Pharm: 10+2 with PCB/PCM and minimum 50%.'
+        ],
+        importantDates: [
+            { event: 'Application Opens', date: 'October 2024' },
+            { event: 'LPUNEST Exam', date: 'January — April 2025' },
+            { event: 'Result Declaration', date: 'Within 2 weeks of exam' },
+            { event: 'Admission Deadline', date: 'July 2025' }
+        ],
+        placementTrends: [
+            { year: '2024-25', rate: 90 },
+            { year: '2023-24', rate: 85 },
+            { year: '2022-23', rate: 82 },
+            { year: '2021-22', rate: 78 },
+            { year: '2020-21', rate: 72 }
+        ],
+        staticReviews: [
+            { name: 'Priya Sharma', course: 'B.Tech CSE, 2024', rating: 5, comment: 'Amazing campus with great infrastructure. The placement cell is very active and I got placed in a top MNC in my 6th semester itself. Highly recommend LPU for engineering!' },
+            { name: 'Rahul Verma', course: 'MBA, 2023', rating: 4, comment: 'The MBA program is well-structured with good industry exposure. Faculty are experienced and the case-study approach helped me a lot. Placement support was excellent.' },
+            { name: 'Ananya Gupta', course: 'BCA, 2024', rating: 4, comment: 'Good exposure to coding and tech events. The campus life is vibrant with many clubs. Wi-Fi could be better in hostels, but overall it\'s a great experience.' },
+            { name: 'Mohammed Faizan', course: 'B.Pharm, 2023', rating: 3, comment: 'Decent pharmacy program with good labs. The campus is huge and well-maintained. However, the fee structure could be more transparent. Placements for pharmacy are average.' }
+        ]
     }
 ];
 

@@ -67,6 +67,20 @@ exports.getCollege = async (req, res) => {
     }
 };
 
+// GET /api/colleges/slug/:slug
+exports.getCollegeBySlug = async (req, res) => {
+    try {
+        const college = await College.findOne({ slug: req.params.slug });
+        if (!college) {
+            return res.status(404).json({ success: false, message: 'College not found' });
+        }
+        const reviews = await Review.find({ college: college._id }).populate('user', 'name').sort('-createdAt').limit(10);
+        res.status(200).json({ success: true, data: college, reviews });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
 // GET /api/colleges/compare?ids=id1,id2,id3
 exports.compareColleges = async (req, res) => {
     try {

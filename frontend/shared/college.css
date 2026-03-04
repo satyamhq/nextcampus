@@ -1,0 +1,164 @@
+/* ============================================
+   NextCampus — Shared College Card Styles
+   Reusable card components for college listings
+   across home, colleges listing, and other pages
+   ============================================ */
+
+/* --- College Card Base --- */
+.college-card,
+.clg-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.college-card:hover,
+.clg-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+/* --- Card Header --- */
+.college-card-header,
+.clg-card-top {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.college-card-header h3,
+.clg-card-info h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    padding-right: 50px;
+}
+
+.college-card-header p,
+.clg-card-info p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* --- Score Badge --- */
+.college-score,
+.clg-score {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+}
+
+.clg-score {
+    position: static;
+    width: 48px;
+    height: 48px;
+    font-size: 0.88rem;
+    flex-shrink: 0;
+}
+
+.clg-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.clg-card-info .badge {
+    margin-top: 6px;
+}
+
+/* --- Card Badges Row --- */
+.college-card-badges {
+    padding: 10px 24px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+}
+
+.card-badge-rating {
+    padding: 4px 10px;
+    background: #fff8e1;
+    color: #b8860b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 4px;
+}
+
+.card-badge-accr {
+    padding: 4px 10px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 4px;
+}
+
+/* --- Card Body (Stats Grid) --- */
+.college-card-body,
+.clg-card-stats {
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.college-stat,
+.clg-stat {
+    text-align: center;
+}
+
+.college-stat label,
+.clg-stat label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+}
+
+.college-stat strong,
+.clg-stat strong {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* --- Card Footer (Actions) --- */
+.college-card-footer,
+.clg-card-actions {
+    padding: 12px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+}
+
+.college-card-footer .btn,
+.clg-card-actions .btn {
+    flex: 1;
+    font-size: 0.8rem;
+    padding: 9px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+
+    .college-card-body,
+    .clg-card-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

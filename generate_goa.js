@@ -1,0 +1,379 @@
+const fs = require('fs');
+const path = require('path');
+const { getTabsHtml, getJsContent, getFullCss } = require('./gen_utils.js');
+
+const basePath = path.join(__dirname, 'frontend', 'colleges');
+const homeJsPath = path.join(__dirname, 'frontend', 'home', 'home.js');
+
+function slugify(text) {
+    if (!text) return 'unknown';
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '');
+}
+
+const goaColleges = [
+    // Universities
+    { name: "Goa University", abbr: "GU", city: "Taleigao", type: "State", est: 1985, category: "Arts & Science" },
+    { name: "BITS Pilani Goa Campus", abbr: "BITS Goa", city: "Zuarinagar", type: "Private Deemed", est: 2004, category: "Engineering" },
+
+    // Engineering Colleges
+    { name: "Goa College of Engineering", abbr: "GEC", city: "Farmagudi", type: "Government", est: 1967, category: "Engineering" },
+    { name: "Don Bosco College of Engineering", abbr: "DBCE", city: "Fatorda", type: "Private", est: 2011, category: "Engineering" },
+    { name: "Shree Rayeshwar Institute of Engineering and Information Technology", abbr: "SRIEIT", city: "Shiroda", type: "Private", est: 2001, category: "Engineering" },
+    { name: "Agnel Institute of Technology and Design", abbr: "AITD", city: "Assagao", type: "Private", est: 2012, category: "Engineering" },
+    { name: "Padre Conceicao College of Engineering", abbr: "PCCE", city: "Verna", type: "Private", est: 1997, category: "Engineering" },
+
+    // Medical & Health Colleges
+    { name: "Goa Medical College", abbr: "GMC", city: "Bambolim", type: "Government", est: 1842, category: "Medical" },
+    { name: "Goa Dental College and Hospital", abbr: "GDC", city: "Bambolim", type: "Government", est: 1980, category: "Medical" },
+    { name: "Goa College of Pharmacy", abbr: "GCP", city: "Panaji", type: "Government", est: 1842, category: "Pharmacy" },
+    { name: "Institute of Nursing Education", abbr: "INE Goa", city: "Bambolim", type: "Government", est: 1977, category: "Medical" },
+    { name: "Goa College of Homeopathy", abbr: "GCH", city: "Shiroda", type: "Private", est: 1989, category: "Medical" },
+
+    // Arts / Science / Commerce Colleges (Major & Degree)
+    { name: "Dhempe College of Arts and Science", abbr: "DCAS", city: "Miramar", type: "Private Aided", est: 1962, category: "Arts & Science" },
+    { name: "St. Xavier's College Mapusa", abbr: "SXC Mapusa", city: "Mapusa", type: "Private Aided", est: 1963, category: "Arts & Science" },
+    { name: "Parvatibai Chowgule College of Arts and Science", abbr: "Chowgule College", city: "Margao", type: "Autonomous", est: 1962, category: "Arts & Science" },
+    { name: "Rosary College of Commerce and Arts", abbr: "RCCA", city: "Navelim", type: "Private Aided", est: 1990, category: "Arts & Science" },
+    { name: "S.S. Dempo College of Commerce and Economics", abbr: "Dempo College", city: "Cujira", type: "Private Aided", est: 1966, category: "Arts & Science" },
+    { name: "Government College of Arts Science and Commerce Sanquelim", abbr: "GCASCS", city: "Sanquelim", type: "Government", est: 1988, category: "Arts & Science" },
+    { name: "Carmel College for Women Nuvem", abbr: "CCW", city: "Nuvem", type: "Private Aided", est: 1964, category: "Arts & Science" },
+    { name: "St. Joseph Vaz College Cortalim", abbr: "SJVC", city: "Cortalim", type: "Private", est: 2013, category: "Arts & Science" },
+    { name: "VVM's Shree Damodar College of Commerce and Economics", abbr: "Damodar College", city: "Margao", type: "Private Aided", est: 1973, category: "Arts & Science" },
+    { name: "Government College Quepem", abbr: "GC Quepem", city: "Quepem", type: "Government", est: 1989, category: "Arts & Science" },
+    { name: "Government College Pernem", abbr: "GC Pernem", city: "Pernem", type: "Government", est: 1993, category: "Arts & Science" },
+    { name: "Government College Khandola", abbr: "GC Khandola", city: "Khandola", type: "Government", est: 1989, category: "Arts & Science" },
+    { name: "Government College of Commerce and Economics Borda", abbr: "GCCE Borda", city: "Borda", type: "Government", est: 2010, category: "Arts & Science" },
+    { name: "Narayan Zantye College of Commerce", abbr: "NZCC", city: "Bicholim", type: "Private Aided", est: 1992, category: "Arts & Science" },
+    { name: "Goa Multi Faculty College", abbr: "GMFC", city: "Dharbandora", type: "Government", est: 2013, category: "Arts & Science" },
+
+    // Law Colleges
+    { name: "V.M. Salgaocar College of Law", abbr: "VMSCL", city: "Miramar", type: "Private Aided", est: 1973, category: "Law" },
+    { name: "Government Law College Panaji", abbr: "GLC Panaji", city: "Panaji", type: "Government", est: 1979, category: "Law" },
+
+    // Architecture / Design / Specialized Colleges
+    { name: "Goa College of Architecture", abbr: "GCA", city: "Altinho", type: "Government", est: 1982, category: "Architecture" },
+    { name: "Goa College of Art", abbr: "GCA Art", city: "Altinho", type: "Government", est: 1972, category: "Arts & Science" },
+    { name: "Kala Academy College of Music", abbr: "KACM", city: "Campal", type: "Government", est: 1970, category: "Arts & Science" },
+
+    // Hotel Management & Tourism Colleges
+    { name: "Institute of Hotel Management Goa", abbr: "IHM Goa", city: "Porvorim", type: "Government", est: 1968, category: "Hospitality" },
+    { name: "Institute of Hospitality and Tourism Studies", abbr: "IHTS", city: "Margao", type: "Private", est: 2010, category: "Hospitality" },
+
+    // Polytechnic & Technical Institutes
+    { name: "Government Polytechnic Panaji", abbr: "GPP", city: "Altinho", type: "Government", est: 1979, category: "Engineering" },
+    { name: "Government Polytechnic Bicholim", abbr: "GPB", city: "Bicholim", type: "Government", est: 1992, category: "Engineering" },
+    { name: "Government Polytechnic Curchorem", abbr: "GPC", city: "Curchorem", type: "Government", est: 1996, category: "Engineering" },
+    { name: "Agnel Polytechnic Verna", abbr: "AP Verna", city: "Verna", type: "Private Aided", est: 1979, category: "Engineering" },
+
+    // Other Institutes
+    { name: "National Institute of Oceanography Goa", abbr: "NIO", city: "Dona Paula", type: "Government", est: 1966, category: "Science" },
+    { name: "National Institute of Technology Goa", abbr: "NIT Goa", city: "Farmagudi", type: "Government", est: 2010, category: "Engineering" },
+    { name: "Goa Institute of Management", abbr: "GIM", city: "Sanquelim", type: "Private", est: 1993, category: "Management" },
+    { name: "Goa Business School", abbr: "GBS", city: "Taleigao", type: "Government", est: 1988, category: "Management" },
+    { name: "Xavier Institute of Management and Research Goa", abbr: "XIMR", city: "Porvorim", type: "Private", est: 2006, category: "Management" },
+    { name: "Goa Institute of Maritime Studies", abbr: "GIMS", city: "Mormugao", type: "Private", est: 1998, category: "Marine" },
+    { name: "Institute of Shipbuilding Technology", abbr: "ISBT", city: "Vasco da Gama", type: "Government", est: 1981, category: "Marine" }
+];
+
+function generateHtml(col, collegeSlug) {
+    let coursesHtml = "";
+    let admissionHtml = "";
+    let placementInfo = "";
+
+    if (col.abbr === "BITS Goa") {
+        coursesHtml = `<tr><td><strong>B.E. (Hons)</strong></td><td>4 Years</td><td>&#8377;18L — &#8377;22L</td><td>10+2 PCM + BITSAT</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>
+                     <tr><td><strong>M.E.</strong></td><td>2 Years</td><td>&#8377;8L — &#8377;10L</td><td>B.E./B.Tech + BITS HD/GATE</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>`;
+        admissionHtml = "Admissions strictly through BITSAT (BITS Admission Test) for UG programs.";
+        placementInfo = "Stellar placements equivalent to top IITs/NITs with packages exceeding 40-50 LPA in top tech and finance firms.";
+    } else if (col.abbr === "GIM") {
+        coursesHtml = `<tr><td><strong>PGDM (MBA Equivalent)</strong></td><td>2 Years</td><td>&#8377;18L — &#8377;20L</td><td>Graduation + CAT/XAT/GMAT</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>
+                     <tr><td><strong>PGDM (Healthcare / BDA / BFSI)</strong></td><td>2 Years</td><td>&#8377;18L — &#8377;20L</td><td>Graduation + Entrance</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>`;
+        admissionHtml = "Competitive admission process via national level management tests (CAT, XAT, GMAT, CMAT) followed by GD and PI.";
+        placementInfo = "Consistently ranked among the top B-Schools in India with average packages upwards of 14-16 LPA in consulting, FMCG, and IT.";
+    } else if (col.category === 'Medical' || col.category === 'Pharmacy') {
+        coursesHtml = `<tr><td><strong>MBBS / BDS / B.Pharm / B.Sc Nursing</strong></td><td>4-5.5 Yrs</td><td>&#8377;50K — &#8377;2L</td><td>10+2 PCB + GCET / NEET</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>`;
+        admissionHtml = "Admissions regulated by Directorate of Technical Education (DTE), Goa based on NEET UG scores for Medicine/Dentistry and GCET for Allied Health.";
+        placementInfo = "Mandatory clinical internship in Goa Medical College/Hospitals with monthly stipends.";
+    } else if (col.category === 'Engineering' || col.category === 'Architecture' || col.category === 'Marine') {
+        coursesHtml = `<tr><td><strong>B.E. / B.Tech / B.Arch</strong></td><td>4-5 Years</td><td>&#8377;1.5L — &#8377;6L</td><td>10+2 PCM + GCET / NATA</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>
+                     <tr><td><strong>Diploma (Polytechnic)</strong></td><td>3 Years</td><td>&#8377;50K — &#8377;1L</td><td>10th Pass</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>`;
+        admissionHtml = "State engineering admissions are primarily through GCET (Goa Common Entrance Test) organized by DTE, Goa. NATA required for Architecture.";
+        placementInfo = "Solid placements particularly in local industries (shipping, manufacturing) and IT parks in Verna.";
+    } else if (col.category === 'Hospitality') {
+        coursesHtml = `<tr><td><strong>B.Sc (H&HA)</strong></td><td>3 Years</td><td>&#8377;2.5L — &#8377;4L</td><td>10+2 + NCHMCT JEE</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>`;
+        admissionHtml = "Admissions through NCHMCT JEE for central institutes like IHM Goa.";
+        placementInfo = "Excellent placements driving the tourist economy; alumni work globally in top luxury hotel chains and cruise lines.";
+    } else if (col.category === 'Law') {
+        coursesHtml = `<tr><td><strong>LLB Degree</strong></td><td>3 Years</td><td>&#8377;50K — &#8377;1.5L</td><td>Graduation</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>
+                     <tr><td><strong>BA LLB</strong></td><td>5 Years</td><td>&#8377;1L — &#8377;3L</td><td>10+2</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>`;
+        admissionHtml = "Admissions generally based on merit/entrance tests conducted by the respective colleges under Goa University.";
+        placementInfo = "Placements span legal practice in the Bombay High Court (Goa Bench), corporate law, and state judiciary.";
+    } else {
+        coursesHtml = `<tr><td><strong>B.A. / B.Sc / B.Com</strong></td><td>3-4 Years</td><td>&#8377;10K — &#8377;40K</td><td>10+2 Pass</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>
+                     <tr><td><strong>M.A. / M.Sc / M.Com</strong></td><td>2 Years</td><td>&#8377;20K — &#8377;60K</td><td>Bachelor's Degree + GU-ART</td><td><a href="#" class="apply-link">Apply &#8594;</a></td></tr>`;
+        admissionHtml = "Postgraduate admissions are through GU-ART (Goa University Admissions Ranking Test). UG admissions via 12th merit.";
+        placementInfo = "Graduates pursue varied paths including tourism management, banking, state civil public services, and higher education.";
+    }
+
+    const tabsHtml = getTabsHtml(col.category);
+    const feesSectionHtml = col.category !== 'Medical' ? `
+            <section class="lpu-panel" id="panel-fees">
+                <div class="lpu-card">
+                    <h2>Fee Structure & Scholarships</h2>
+                    <p>Details about the fee structure and demographic scholarships available to permanent residents of Goa.</p>
+                    <div class="scholarship-grid">
+                        <div class="scholarship-item"><div class="scholarship-icon">&#127775;</div><h4>Dayanand Bandodkar Scheme</h4><p>Provides financial assistance for higher education for orphans.</p></div>
+                        <div class="scholarship-item"><div class="scholarship-icon">&#128188;</div><h4>Bursary Scheme</h4><p>Fee concessions based on economic strata provided directly by Govt of Goa.</p></div>
+                    </div>
+                </div>
+            </section>
+  ` : "";
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${col.name} (${col.abbr}) - Admission, Fees, Placements & Courses 2026 | NextCampus</title>
+    <meta name="description" content="Explore ${col.name} admissions 2026, courses, detailed fee structure, placement packages, scholarships, and campus life. Get verified details at NextCampus.">
+    <meta name="keywords" content="${col.name}, ${col.abbr}, ${col.abbr} admission 2026, ${col.name} placements, GCET Goa, Goa University, NextCampus">
+    <link rel="icon" type="image/svg+xml" href="../../../favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../../favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="../../../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../favicon/site.webmanifest">
+    <meta name="theme-color" content="#0056D2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/global.css">
+    <link rel="stylesheet" href="../../../shared/header.css">
+    <link rel="stylesheet" href="../../../shared/footer.css">
+    <link rel="stylesheet" href="../../../shared/college.css">
+    <link rel="stylesheet" href="${collegeSlug}.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "${col.name}",
+      "alternateName": "${col.abbr}",
+      "url": "https://nextcampus.com/colleges/goa/${collegeSlug}/${collegeSlug}.html",
+      "logo": "https://nextcampus.com/colleges/goa/${collegeSlug}/images/logo/${collegeSlug}_logo.png"
+    }
+    </script>
+</head>
+<body>
+
+    <div class="lpu-sticky-header" id="lpu-sticky-header">
+        <div class="container lpu-sticky-inner">
+            <div class="lpu-sticky-left">
+                <span class="lpu-sticky-name">${col.name}</span>
+                <span class="lpu-sticky-loc">&#128205; ${col.city}, Goa</span>
+            </div>
+            <a href="#" class="btn-lpu-apply">Apply Now &#8594;</a>
+        </div>
+    </div>
+
+    <section class="lpu-hero" id="lpu-hero"
+        style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)), url('images/cover/${collegeSlug}_cover.png'); background-size: cover; background-position: center;">
+        <div class="container">
+            <div class="lpu-hero-grid">
+                <div class="lpu-hero-info">
+                    <img src="images/logo/${collegeSlug}_logo.png" alt="Official Logo of ${col.name} - NextCampus" class="lpu-logo-img">
+                    <div>
+                        <h1>${col.name} <span class="lpu-abbr">(${col.abbr})</span></h1>
+                        <p class="lpu-location">&#128205; ${col.city}, Goa, India</p>
+                        <div class="lpu-rating">
+                            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                            <strong>4.2</strong>/5
+                        </div>
+                        <div class="lpu-meta">
+                            <span>Est. <strong>${col.est}</strong></span>
+                            <span class="divider">|</span>
+                            <span>Type: <strong>${col.type}</strong></span>
+                        </div>
+                        <div class="lpu-badges">
+                            <span class="badge-rank nirf">&#127942; Top Rated</span>
+                            <span class="badge-accr">Recognized</span>
+                        </div>
+                        <div class="lpu-ctas">
+                            <a href="#" class="btn-lpu-apply">Apply Now &#8594;</a>
+                            <a href="#" class="btn-lpu-brochure" onclick="alert('Brochure download coming soon!');return false;">&#128196; Download Brochure</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+${tabsHtml}
+
+    <main class="lpu-main">
+        <div class="container">
+
+            <!-- OVERVIEW -->
+            <section class="lpu-panel active" id="panel-overview">
+                <div class="lpu-card">
+                    <h2>About ${col.name}</h2>
+                    <p>${col.name} (${col.abbr}) is a highly regarded educational institution situated in ${col.city}, Goa. Established in ${col.est}, it has significantly contributed to the academic landscape of the state, blending modern educational practices with the rich cultural heritage of Goa.</p>
+                </div>
+                
+                <div class="lpu-card">
+                    <div class="overview-section-header">
+                        <h3>&#128218; Top Courses &amp; Eligibility</h3>
+                        <button class="btn-view-tab" data-target="courses">View All &#8594;</button>
+                    </div>
+                    <div class="table-scroll">
+                        <table class="lpu-table">
+                            <thead><tr><th>Course</th><th>Duration</th><th>Total Fees (Approx.)</th><th>Eligibility</th><th>Apply</th></tr></thead>
+                            <tbody>
+                                ${coursesHtml}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="lpu-card">
+                    <h3>Admissions Route</h3>
+                    <p>${admissionHtml}</p>
+                    <button class="btn-view-tab" data-target="admission" style="margin-top: 10px;">View Admission Process &#8594;</button>
+                </div>
+            </section>
+            
+            <!-- COURSES -->
+            <section class="lpu-panel" id="panel-courses">
+                <div class="lpu-card">
+                    <h2>Academic Programs</h2>
+                    <div class="table-scroll">
+                        <table class="lpu-table">
+                            <thead><tr><th>Course</th><th>Duration</th><th>Total Fees (Approx.)</th><th>Eligibility</th><th>Apply</th></tr></thead>
+                            <tbody>
+                                ${coursesHtml}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ADMISSION -->
+            <section class="lpu-panel" id="panel-admission">
+                <div class="lpu-card">
+                    <h2>Admission Information</h2>
+                    <div class="steps-list">
+                        <div class="step-item"><div class="step-num">1</div><div><h4>Qualify Exam (GCET/GU-ART/Merit)</h4><p>${admissionHtml}</p></div></div>
+                        <div class="step-item"><div class="step-num">2</div><div><h4>Counselling Process</h4><p>Participate in DTE / Goa University counselling based on your merit list ranking.</p></div></div>
+                        <div class="step-item"><div class="step-num">3</div><div><h4>Seat Acceptance</h4><p>Verify documents, including Goan residency status if applying for state quotas, and pay fees.</p></div></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- FEES -->
+            ${feesSectionHtml}
+
+            <!-- PLACEMENTS -->
+            <section class="lpu-panel" id="panel-placements">
+                <div class="lpu-card">
+                    <h2>${col.category === 'Medical' || col.category === 'Dental' ? 'Internships & Residency' : 'Placements & Internships'}</h2>
+                    <p>${placementInfo}</p>
+                </div>
+            </section>
+
+            <!-- REVIEWS -->
+            <section class="lpu-panel" id="panel-reviews">
+                <div class="lpu-card">
+                    <h2>Student Reviews</h2>
+                    <p>Average Rating: <strong>4.2 / 5</strong></p>
+                    <div class="review-item">
+                        <div class="review-top"><strong>Verified Student</strong><span class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span></div>
+                        <p>"Fantastic campus life, balanced academics, and great community. The faculty is highly experienced and approachable."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GALLERY -->
+            <section class="lpu-panel" id="panel-gallery">
+                <div class="lpu-card">
+                    <h2>Campus Gallery</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item"><div class="gallery-placeholder">&#127963;</div><span>Main Building</span></div>
+                        <div class="gallery-item"><div class="gallery-placeholder">&#128218;</div><span>Library & Campus</span></div>
+                        <div class="gallery-item"><div class="gallery-placeholder">&#127968;</div><span>Canteen & Hostels</span></div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div class="mobile-apply-bar" id="mobile-apply-bar">
+        <a href="#" class="btn-lpu-apply mobile-apply-btn">Apply Now &#8594;</a>
+    </div>
+
+    <script src="../../../shared/header.js"></script>
+    <script src="../../../shared/footer.js"></script>
+    <script src="${collegeSlug}.js"></script>
+</body>
+</html>`;
+}
+
+function processAll() {
+    const newCards = [];
+    let homeContent = fs.readFileSync(homeJsPath, 'utf8');
+
+    for (const col of goaColleges) {
+        const collegeSlug = slugify(col.name);
+
+        if (homeContent.includes(collegeSlug)) {
+            console.log(`Skipping ${col.name} (${collegeSlug}) - Already exists.`);
+            continue;
+        }
+
+        const dir = path.join(basePath, 'goa', collegeSlug);
+        fs.mkdirSync(path.join(dir, 'images', 'logo'), { recursive: true });
+        fs.mkdirSync(path.join(dir, 'images', 'cover'), { recursive: true });
+
+        // CSS
+        fs.writeFileSync(path.join(dir, collegeSlug + '.css'), getFullCss());
+
+        // Write HTML & JS
+        fs.writeFileSync(path.join(dir, collegeSlug + '.html'), generateHtml(col, collegeSlug), 'utf8');
+        fs.writeFileSync(path.join(dir, collegeSlug + '.js'), getJsContent(col.name, col.abbr, col.slug || collegeSlug), 'utf8');
+
+        // Create card data
+        newCards.push(`    {
+      name: '${col.name.replace(/'/g, "\\'")} (${col.abbr})',
+      city: '${col.city}', state: 'Goa', type: '${col.type}',
+      score: 8.4, totalFees: 'Variable', avgPackage: 'Variable',
+      placementRate: 82, nirf: 0,
+      link: '../colleges/goa/${collegeSlug}/${collegeSlug}.html',
+      rating: '4.2', accr: '${col.type}'
+    }`);
+        console.log(`Generated: ${col.name} (${collegeSlug})`);
+    }
+
+    // Inject into home.js if there are new cards
+    if (newCards.length > 0) {
+        const injectToken = "const colleges = [";
+        const injectionPoint = homeContent.indexOf(injectToken);
+
+        if (injectionPoint !== -1) {
+            const startOfArray = injectionPoint + injectToken.length;
+            homeContent = homeContent.slice(0, startOfArray) + "\n" + newCards.join(",\n") + ",\n" + homeContent.slice(startOfArray);
+            fs.writeFileSync(homeJsPath, homeContent, 'utf8');
+            console.log(`\n✅ Injected ${newCards.length} Goa Colleges into home.js !`);
+        } else {
+            console.log("\n❌ Could not find injection point in home.js.");
+        }
+    } else {
+        console.log(`\n❌ No new Goa Colleges to inject.`);
+    }
+}
+
+processAll();
+
